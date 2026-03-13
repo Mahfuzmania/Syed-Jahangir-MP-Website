@@ -1,4 +1,4 @@
-﻿# Syed Jahangir Alam MP Web Application
+# Syed Jahangir Alam MP Web Application
 
 A bilingual (Bangla + English) full web application for **Syed Jahangir Alam MP, Dinajpur-3**, inspired by the reference structure but with a different UI direction.
 
@@ -36,7 +36,7 @@ A bilingual (Bangla + English) full web application for **Syed Jahangir Alam MP,
 1. Install Node.js LTS (v20 or later recommended):
    - https://nodejs.org/
 2. Open terminal in project folder:
-   - `f:\AZM Labs\MP Website\syeed-jahangir-mp-web`
+   - `f:\AZM Labs\Projects\MP Website - Syed Jahangir Alam\syed-jahangir-mp-web`
 3. Install dependencies:
    - `npm install`
 4. Create environment file:
@@ -77,4 +77,3 @@ For internet deployment later, move to:
 - Cloud object storage for uploads
 - Hardened auth (NextAuth/Keycloak)
 - Managed deployment (Vercel + Supabase)
-
