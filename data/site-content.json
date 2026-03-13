@@ -1,0 +1,576 @@
+{
+  "candidate": {
+    "name": {
+      "bn": "সৈয়দ জাহাঙ্গীর আলম",
+      "en": "Syed Jahangir Alam"
+    },
+    "shortTitle": {
+      "bn": "দিনাজপুর-৩ আসনের সংসদ সদস্য",
+      "en": "Member of Parliament, Dinajpur-3"
+    },
+    "intro": {
+      "bn": "সৈয়দ জাহাঙ্গীর আলম দিনাজপুর-৩ আসনের মানুষের জন্য শিক্ষা, কৃষি, কর্মসংস্থান ও জনসেবায় আধুনিক ও জবাবদিহিমূলক উন্নয়নের অঙ্গীকার নিয়ে কাজ করছেন।",
+      "en": "Syed Jahangir Alam is committed to accountable development in education, agriculture, jobs, and public services for the people of Dinajpur-3."
+    },
+    "heroSlogan": {
+      "bn": "মানুষের আস্থা, উন্নয়নের প্রতিশ্রুতি",
+      "en": "Public Trust, Development Delivered"
+    },
+    "heroImage": "/uploads/images/chatgpt-image-feb-21-2026-12_19_15-am-1771611587507-0bf69a4b.png",
+    "profileImage": "/uploads/images/chatgpt-image-feb-21-2026-12_19_15-am-1771611587507-0bf69a4b.png"
+  },
+  "profileSection": {
+    "biographyTitle": {
+      "bn": "জীবনী (সংক্ষিপ্ত)",
+      "en": "Short Biography"
+    },
+    "biographyText": {
+      "bn": "সৈয়দ জাহাঙ্গীর আলম দিনাজপুর-৩ এলাকার শিক্ষা, কৃষি, স্বাস্থ্য, কর্মসংস্থান এবং নাগরিক সেবাকে অগ্রাধিকার দিয়ে ধারাবাহিকভাবে মাঠপর্যায়ে কাজ করছেন। নিয়মিত জনসংযোগ, সমস্যা শুনানি এবং দ্রুত সমাধান ব্যবস্থাকে তিনি জনসেবার মূল পদ্ধতি হিসেবে অনুসরণ করেন।",
+      "en": "Syed Jahangir Alam continues grassroots work in Dinajpur-3 with priority on education, agriculture, healthcare, employment, and citizen services. He follows a service model built on regular public engagement, issue hearings, and faster resolution."
+    },
+    "activitiesTitle": {
+      "bn": "প্রধান কার্যক্রম",
+      "en": "Key Activities"
+    },
+    "booksTitle": {
+      "bn": "প্রকাশনা ও রেফারেন্স",
+      "en": "Publications and References"
+    },
+    "books": [
+      {
+        "id": "pb1",
+        "cover": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80",
+        "title": {
+          "bn": "স্থানীয় উন্নয়ন পরিকল্পনা",
+          "en": "Local Development Planning"
+        },
+        "summary": {
+          "bn": "এলাকাভিত্তিক উন্নয়ন অগ্রাধিকার ও বাস্তবায়ন কাঠামো",
+          "en": "Area-based development priorities and implementation framework"
+        }
+      },
+      {
+        "id": "pb2",
+        "cover": "https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=800&q=80",
+        "title": {
+          "bn": "জনসেবা ও জবাবদিহি",
+          "en": "Public Service and Accountability"
+        },
+        "summary": {
+          "bn": "সেবা মানোন্নয়ন ও নাগরিক সম্পৃক্ততার নীতিমালা",
+          "en": "Policy notes on service quality and citizen participation"
+        }
+      }
+    ],
+    "collectionTitle": {
+      "bn": "সংগ্রহ/রেফারেন্স তথ্য",
+      "en": "Collection/Reference Information"
+    },
+    "collectionPoints": {
+      "bn": [
+        "১) দিনাজপুর-৩ এমপি অফিস থেকে রেফারেন্স কপি সংগ্রহ করা যাবে।",
+        "২) অফিসিয়াল সামাজিক মাধ্যম ইনবক্সে যোগাযোগ করে তথ্য পাওয়া যাবে।"
+      ],
+      "en": [
+        "1) Reference copies are available from the Dinajpur-3 MP office.",
+        "2) Details can also be requested via official social media inbox."
+      ]
+    },
+    "officeButtonLabel": {
+      "bn": "অফিস যোগাযোগ",
+      "en": "Office Contact"
+    },
+    "facebookButtonLabel": {
+      "bn": "ফেসবুকে যোগাযোগ",
+      "en": "Contact on Facebook"
+    }
+  },
+  "preFooterCta": {
+    "title": {
+      "bn": "আপনি কি উন্নয়নের অংশ হতে চান?",
+      "en": "Do you want to be part of this development?"
+    },
+    "description": {
+      "bn": "আপনার এলাকার সমস্যা, পরামর্শ এবং জনসেবার অগ্রাধিকার জানালে দ্রুত পরিকল্পনা ও বাস্তবায়ন সম্ভব হবে।",
+      "en": "Share your local issues, suggestions, and service priorities to accelerate planning and implementation."
+    },
+    "volunteerButtonLabel": {
+      "bn": "অনুরোধ ট্র্যাকিং",
+      "en": "Track Request"
+    },
+    "writeToMpButtonLabel": {
+      "bn": "আপনার সাংসদকে লিখুন",
+      "en": "Write to Your MP"
+    }
+  },
+  "commitments": [
+    {
+      "id": "c1",
+      "slug": "modern-health-services",
+      "title": {
+        "bn": "স্থানীয় স্বাস্থ্যসেবার আধুনিকায়ন",
+        "en": "Modern Local Healthcare"
+      },
+      "summary": {
+        "bn": "উপজেলা ও ইউনিয়ন পর্যায়ে ডাক্তার, টেস্ট সুবিধা ও জরুরি সেবার সম্প্রসারণ।",
+        "en": "Expand doctors, diagnostics, and emergency care at upazila and union levels."
+      },
+      "details": {
+        "bn": "দিনাজপুর-৩ এ উপজেলা স্বাস্থ্য কমপ্লেক্সে বিশেষজ্ঞ চিকিৎসক উপস্থিতি, ডায়াগনস্টিক সুবিধা, মাতৃসেবা ও অ্যাম্বুলেন্স নেটওয়ার্ক উন্নয়নে অগ্রাধিকার দেওয়া হবে।",
+        "en": "Priority will be given to specialist availability, diagnostics, maternal care, and ambulance network upgrades across Dinajpur-3."
+      },
+      "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "c2",
+      "slug": "smart-agri-and-irrigation",
+      "title": {
+        "bn": "স্মার্ট কৃষি ও সেচব্যবস্থা",
+        "en": "Smart Agriculture and Irrigation"
+      },
+      "summary": {
+        "bn": "কৃষকের উৎপাদন খরচ কমাতে সেচ, সংরক্ষণ ও বাজার সংযোগে প্রযুক্তি সহায়তা।",
+        "en": "Technology support for irrigation, storage, and market linkage to reduce farmer costs."
+      },
+      "details": {
+        "bn": "ফসলভিত্তিক পরামর্শ, সেচ চ্যানেল উন্নয়ন, খাল পুনঃখনন, এবং সরাসরি কৃষক-ক্রেতা সংযোগ প্ল্যাটফর্ম চালু করা হবে।",
+        "en": "Crop advisories, irrigation upgrades, canal restoration, and direct farmer-to-buyer platforms will be introduced."
+      },
+      "image": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "c3",
+      "slug": "jobs-and-skills",
+      "title": {
+        "bn": "যুব দক্ষতা ও কর্মসংস্থান",
+        "en": "Youth Skills and Employment"
+      },
+      "summary": {
+        "bn": "প্রশিক্ষণ, আইটি স্কিল ও উদ্যোক্তা সহায়তার মাধ্যমে স্থানীয় চাকরির সুযোগ তৈরি।",
+        "en": "Create local jobs through training, IT skills, and entrepreneurship support."
+      },
+      "details": {
+        "bn": "প্রতিটি ইউনিয়নে স্কিল সাপোর্ট ডেস্ক, নারীদের জন্য বিশেষ উদ্যোক্তা সহায়তা, এবং ই-কমার্সভিত্তিক বাজার সম্প্রসারণ করা হবে।",
+        "en": "Union-level skill desks, women-focused enterprise support, and e-commerce market expansion will be implemented."
+      },
+      "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "c4",
+      "slug": "safe-roads-and-drainage",
+      "title": {
+        "bn": "নিরাপদ সড়ক ও জলাবদ্ধতা নিয়ন্ত্রণ",
+        "en": "Safe Roads and Drainage"
+      },
+      "summary": {
+        "bn": "গ্রামীণ সড়ক সংস্কার, ব্রিজ-কালভার্ট ও ড্রেনেজ ব্যবস্থার সমন্বিত উন্নয়ন।",
+        "en": "Integrated rural road repair, bridges/culverts, and drainage improvements."
+      },
+      "details": {
+        "bn": "বর্ষায় জলাবদ্ধতা কমাতে ড্রেনেজ মাস্টারপ্ল্যান, এবং স্কুল-হাসপাতালগামী সড়কগুলোকে অগ্রাধিকার দিয়ে উন্নয়ন করা হবে।",
+        "en": "A drainage masterplan and priority upgrades for school/hospital-access roads will reduce monsoon waterlogging."
+      },
+      "image": "https://images.unsplash.com/photo-1470004914212-05527e49370b?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "c5",
+      "slug": "digital-public-service",
+      "title": {
+        "bn": "ডিজিটাল জনসেবা কেন্দ্র",
+        "en": "Digital Public Service Hubs"
+      },
+      "summary": {
+        "bn": "এলাকাভিত্তিক ডিজিটাল সেবায় জন্মনিবন্ধন, ভূমি, ভাতা ও অভিযোগ সেবা এক জায়গায়।",
+        "en": "Birth registration, land, allowance, and complaint services through local digital hubs."
+      },
+      "details": {
+        "bn": "দালালমুক্ত সেবা নিশ্চিত করতে ইউনিয়নভিত্তিক ডিজিটাল সহায়তা ডেস্ক ও সেবা ট্র্যাকিং ব্যবস্থা চালু করা হবে।",
+        "en": "Union-based support desks and service tracking will ensure transparent, broker-free access."
+      },
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "c6",
+      "slug": "women-safety-and-education",
+      "title": {
+        "bn": "নারী নিরাপত্তা ও শিক্ষা উন্নয়ন",
+        "en": "Women Safety and Education"
+      },
+      "summary": {
+        "bn": "স্কুল-কলেজে নিরাপদ পরিবেশ, স্কলারশিপ ও নারীর অর্থনৈতিক সক্ষমতা বৃদ্ধির উদ্যোগ।",
+        "en": "Safer campuses, scholarships, and stronger economic participation for women."
+      },
+      "details": {
+        "bn": "মেয়েদের শিক্ষায় ঝরে পড়া রোধ, স্বনির্ভরতা প্রশিক্ষণ এবং স্থানীয় নিরাপত্তা পর্যবেক্ষণ জোরদার করা হবে।",
+        "en": "Dropout prevention, self-reliance training, and local safety monitoring will be strengthened."
+      },
+      "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80"
+    }
+  ],
+  "workHistory": [
+    {
+      "id": "w1",
+      "title": {
+        "bn": "রাস্তা ও কালভার্ট উন্নয়ন",
+        "en": "Road and Culvert Improvements"
+      },
+      "summary": {
+        "bn": "গ্রাম থেকে উপজেলা সংযোগে চলাচল সহজ হয়েছে।",
+        "en": "Travel connectivity from villages to upazila centers improved significantly."
+      },
+      "icon": "road"
+    },
+    {
+      "id": "w2",
+      "title": {
+        "bn": "শিক্ষা সহায়তা কর্মসূচি",
+        "en": "Education Support Programs"
+      },
+      "summary": {
+        "bn": "অসহায় শিক্ষার্থীদের সহায়তা এবং অবকাঠামো উন্নয়ন।",
+        "en": "Support for disadvantaged students and institutional improvements."
+      },
+      "icon": "school"
+    },
+    {
+      "id": "w3",
+      "title": {
+        "bn": "কৃষক সহায়তা ও সেচ",
+        "en": "Farmer Support and Irrigation"
+      },
+      "summary": {
+        "bn": "উৎপাদন ব্যয় কমাতে সেচ এবং পরামর্শ সহায়তা।",
+        "en": "Irrigation and advisory support reducing production costs."
+      },
+      "icon": "leaf"
+    },
+    {
+      "id": "w4",
+      "title": {
+        "bn": "স্বাস্থ্য সহায়তা ক্যাম্প",
+        "en": "Health Service Camps"
+      },
+      "summary": {
+        "bn": "গ্রামীণ এলাকায় নিয়মিত স্বাস্থ্যসেবা কার্যক্রম।",
+        "en": "Regular healthcare outreach in rural communities."
+      },
+      "icon": "health"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "g1",
+      "title": {
+        "bn": "জনসভায় জনগণের সাথে মতবিনিময়",
+        "en": "Public Meeting and Citizen Dialogue"
+      },
+      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80",
+      "album": {
+        "bn": "গণসংযোগ",
+        "en": "Campaign Outreach"
+      }
+    },
+    {
+      "id": "g2",
+      "title": {
+        "bn": "শিক্ষা প্রতিষ্ঠান পরিদর্শন",
+        "en": "School and College Visit"
+      },
+      "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
+      "album": {
+        "bn": "শিক্ষা",
+        "en": "Education"
+      }
+    },
+    {
+      "id": "g3",
+      "title": {
+        "bn": "কৃষকদের সাথে মাঠ পর্যায়ের বৈঠক",
+        "en": "Field Meeting With Farmers"
+      },
+      "image": "https://images.unsplash.com/photo-1536657464919-892534f60d6e?auto=format&fit=crop&w=1200&q=80",
+      "album": {
+        "bn": "কৃষি",
+        "en": "Agriculture"
+      }
+    },
+    {
+      "id": "g4",
+      "title": {
+        "bn": "সামাজিক সহায়তা কর্মসূচি",
+        "en": "Community Support Program"
+      },
+      "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+      "album": {
+        "bn": "সামাজিক কার্যক্রম",
+        "en": "Social Services"
+      }
+    },
+    {
+      "id": "g5",
+      "title": {
+        "bn": "স্বাস্থ্যসেবা ক্যাম্প",
+        "en": "Healthcare Camp"
+      },
+      "image": "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=80",
+      "album": {
+        "bn": "স্বাস্থ্য",
+        "en": "Health"
+      }
+    },
+    {
+      "id": "g6",
+      "title": {
+        "bn": "নারী উদ্যোক্তা সভা",
+        "en": "Women Entrepreneur Meetup"
+      },
+      "image": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80",
+      "album": {
+        "bn": "নারী উন্নয়ন",
+        "en": "Women Development"
+      }
+    }
+  ],
+  "news": [
+    {
+      "id": "n1",
+      "slug": "community-dialogue-in-dinajpur",
+      "title": {
+        "bn": "দিনাজপুরে জনসংলাপ: নাগরিক সেবা সহজ করার রোডম্যাপ",
+        "en": "Dinajpur Public Dialogue: Roadmap for Easier Citizen Services"
+      },
+      "excerpt": {
+        "bn": "জনগণের প্রত্যাশা ও স্থানীয় সমস্যার বাস্তব সমাধান নিয়ে মতবিনিময় অনুষ্ঠিত হয়।",
+        "en": "A focused dialogue was held on local challenges and practical service delivery solutions."
+      },
+      "content": {
+        "bn": "দিনাজপুর-৩ আসনের নাগরিক সেবা, শিক্ষার পরিবেশ, রাস্তা ও স্বাস্থ্যসেবার উন্নয়ন পরিকল্পনা নিয়ে স্থানীয় প্রতিনিধিদের সাথে বিস্তারিত আলোচনা হয়।",
+        "en": "Local representatives discussed detailed plans for citizen services, education quality, roads, and healthcare delivery in Dinajpur-3."
+      },
+      "date": "2026-02-10",
+      "image": "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1200&q=80",
+      "categories": [
+        "Citizen Services",
+        "Community"
+      ],
+      "tags": [
+        "dialogue",
+        "dinajpur-3",
+        "public-service"
+      ]
+    },
+    {
+      "id": "n2",
+      "slug": "skills-initiative-launch",
+      "title": {
+        "bn": "তরুণদের জন্য স্কিল ইনিশিয়েটিভ চালু",
+        "en": "Skills Initiative Launched for Youth"
+      },
+      "excerpt": {
+        "bn": "স্থানীয় কর্মসংস্থান বাড়াতে প্রশিক্ষণ ও ডিজিটাল দক্ষতা কর্মসূচির ঘোষণা।",
+        "en": "Training and digital skills program announced to expand local employment."
+      },
+      "content": {
+        "bn": "দিনাজপুর-৩ এর তরুণদের জন্য আইটি, কারিগরি, ও ক্ষুদ্র উদ্যোক্তা উন্নয়নভিত্তিক প্রশিক্ষণ কেন্দ্র চালুর পরিকল্পনা প্রকাশ করা হয়েছে।",
+        "en": "A plan was announced for IT, technical, and entrepreneurship training centers for youth in Dinajpur-3."
+      },
+      "date": "2026-01-28",
+      "image": "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=80",
+      "categories": [
+        "Youth",
+        "Employment"
+      ],
+      "tags": [
+        "skills",
+        "training",
+        "jobs"
+      ]
+    },
+    {
+      "id": "n3",
+      "slug": "health-support-camp",
+      "title": {
+        "bn": "গ্রামীণ স্বাস্থ্য সহায়তা ক্যাম্পে ব্যাপক সাড়া",
+        "en": "Strong Response to Rural Health Support Camp"
+      },
+      "excerpt": {
+        "bn": "বিনামূল্যে চিকিৎসা পরামর্শ ও স্বাস্থ্য সচেতনতা কার্যক্রম পরিচালিত হয়।",
+        "en": "Free medical consultations and awareness activities were delivered in rural areas."
+      },
+      "content": {
+        "bn": "নারী ও প্রবীণদের জন্য বিশেষ স্বাস্থ্যসেবা, রক্তচাপ ও ডায়াবেটিস স্ক্রিনিংসহ একদিনের ক্যাম্পে বিপুল অংশগ্রহণ দেখা যায়।",
+        "en": "A one-day camp offered special care for women and seniors, including blood pressure and diabetes screening."
+      },
+      "date": "2026-01-15",
+      "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80",
+      "categories": [
+        "Health"
+      ],
+      "tags": [
+        "camp",
+        "rural-health",
+        "screening"
+      ]
+    }
+  ],
+  "monthlyReports": [
+    {
+      "id": "mr1",
+      "slug": "monthly-progress-january-2026",
+      "title": {
+        "bn": "মাসিক অগ্রগতি প্রতিবেদন: জানুয়ারি ২০২৬",
+        "en": "Monthly Progress Report: January 2026"
+      },
+      "summary": {
+        "bn": "জনসেবা আবেদন, স্থানীয় সমস্যা শুনানি এবং প্রকল্প মনিটরিংয়ের সারসংক্ষেপ।",
+        "en": "Summary of citizen service submissions, local hearings, and project monitoring."
+      },
+      "reportMonth": "2026-01",
+      "publishedDate": "2026-02-05",
+      "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    },
+    {
+      "id": "mr2",
+      "slug": "monthly-progress-february-2026",
+      "title": {
+        "bn": "মাসিক অগ্রগতি প্রতিবেদন: ফেব্রুয়ারি ২০২৬",
+        "en": "Monthly Progress Report: February 2026"
+      },
+      "summary": {
+        "bn": "স্বাস্থ্য ক্যাম্প, শিক্ষা সহায়তা এবং অবকাঠামো তদারকির অবস্থা।",
+        "en": "Updates on health camps, education support, and infrastructure supervision."
+      },
+      "reportMonth": "2026-02",
+      "publishedDate": "2026-03-06",
+      "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    }
+  ],
+  "videos": [
+    {
+      "id": "v1",
+      "title": {
+        "bn": "দিনাজপুর-৩ উন্নয়নের ভিশন বক্তৃতা",
+        "en": "Dinajpur-3 Development Vision Speech"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=khFo6VXggxM",
+      "duration": "06:49",
+      "thumbnail": "https://img.youtube.com/vi/khFo6VXggxM/maxresdefault.jpg"
+    },
+    {
+      "id": "v2",
+      "title": {
+        "bn": "তৃণমূল নেতাকর্মীদের সাথে পরিকল্পনা সভা",
+        "en": "Planning Session With Grassroots Leaders"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=__F06mEAItI",
+      "duration": "03:48",
+      "thumbnail": "https://img.youtube.com/vi/__F06mEAItI/maxresdefault.jpg"
+    },
+    {
+      "id": "v3",
+      "title": {
+        "bn": "স্বাস্থ্য ও শিক্ষা উন্নয়ন পরিকল্পনা",
+        "en": "Healthcare and Education Improvement Plan"
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=mZEZLMpKeH8",
+      "duration": "02:46",
+      "thumbnail": "https://img.youtube.com/vi/mZEZLMpKeH8/maxresdefault.jpg"
+    }
+  ],
+  "governmentProjects": [
+    {
+      "id": "gp1",
+      "slug": "rural-road-upgrade-phase-1",
+      "title": {
+        "bn": "গ্রামীণ সড়ক উন্নয়ন (ফেজ-১)",
+        "en": "Rural Road Upgrade (Phase-1)"
+      },
+      "summary": {
+        "bn": "ইউনিয়ন সংযোগ সড়ক সংস্কার, ড্রেনেজ ও কালভার্ট উন্নয়ন।",
+        "en": "Union-link road rehabilitation with drainage and culvert improvements."
+      },
+      "details": {
+        "bn": "দিনাজপুর-৩ অঞ্চলে যোগাযোগ সহজ করতে সড়কের মানোন্নয়ন, ড্রেনেজ পুনর্বিন্যাস এবং ঝুঁকিপূর্ণ অংশে কালভার্ট উন্নয়ন করা হচ্ছে।",
+        "en": "Road quality upgrades, drainage redesign, and culvert reinforcement are underway to improve mobility across Dinajpur-3."
+      },
+      "sector": "Infrastructure",
+      "location": "Dinajpur-3",
+      "implementingAgency": "LGED",
+      "budgetTotal": 180000000,
+      "spentAmount": 62000000,
+      "startDate": "2025-11-01",
+      "expectedEndDate": "2026-10-31",
+      "status": "running",
+      "phase": {
+        "bn": "বাস্তবায়ন পর্যায়",
+        "en": "Implementation Stage"
+      },
+      "progressPercent": 34,
+      "beneficiaries": {
+        "bn": "৭০,০০০+ নাগরিক",
+        "en": "70,000+ citizens"
+      },
+      "image": "https://images.unsplash.com/photo-1470004914212-05527e49370b?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "gp2",
+      "slug": "community-health-center-support",
+      "title": {
+        "bn": "কমিউনিটি স্বাস্থ্যকেন্দ্র সক্ষমতা উন্নয়ন",
+        "en": "Community Health Center Capacity Upgrade"
+      },
+      "summary": {
+        "bn": "প্রাথমিক স্বাস্থ্যসেবা, ডায়াগনস্টিক সাপোর্ট এবং রেফারেল সক্ষমতা বৃদ্ধি।",
+        "en": "Improved primary care delivery, diagnostics support, and referral readiness."
+      },
+      "details": {
+        "bn": "ইউনিয়ন ও উপজেলা পর্যায়ে মৌলিক স্বাস্থ্যসেবা সম্প্রসারণের জন্য মানবসম্পদ সমন্বয়, সরঞ্জাম সহায়তা এবং সেবা পর্যবেক্ষণ চালু করা হয়েছে।",
+        "en": "Resource alignment, equipment support, and service monitoring are being deployed for stronger union and upazila-level healthcare delivery."
+      },
+      "sector": "Healthcare",
+      "location": "Dinajpur-3",
+      "implementingAgency": "DGHS",
+      "budgetTotal": 95000000,
+      "spentAmount": 22000000,
+      "startDate": "2026-01-10",
+      "expectedEndDate": "2026-12-20",
+      "status": "running",
+      "phase": {
+        "bn": "প্রাথমিক বাস্তবায়ন",
+        "en": "Initial Implementation"
+      },
+      "progressPercent": 23,
+      "beneficiaries": {
+        "bn": "১,২০,০০০+ নাগরিক",
+        "en": "120,000+ citizens"
+      },
+      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
+    }
+  ],
+  "manifesto": {
+    "title": {
+      "bn": "দিনাজপুর-৩ উন্নয়ন ইশতেহার",
+      "en": "Dinajpur-3 Development Manifesto"
+    },
+    "summary": {
+      "bn": "এই ইশতেহারে স্বাস্থ্য, শিক্ষা, কৃষি, কর্মসংস্থান ও ডিজিটাল জনসেবার বাস্তবায়ন রোডম্যাপ দেওয়া হয়েছে।",
+      "en": "This manifesto outlines an implementation roadmap for healthcare, education, agriculture, jobs, and digital citizen services."
+    },
+    "pdfUrl": "https://abulkhairbhuiyan.com/wp-content/uploads/2026/02/%E0%A6%A8%E0%A6%BF%E0%A6%B0%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%9A%E0%A6%A8%E0%A7%80-%E0%A6%87%E0%A6%B6%E0%A6%A4%E0%A7%87%E0%A6%B9%E0%A6%BE%E0%A6%B0-.pdf"
+  },
+  "contact": {
+    "phone": "+880 1712 345678",
+    "email": "office@syeedjahangiralam.org",
+    "address": {
+      "bn": "দিনাজপুর-৩, দিনাজপুর, বাংলাদেশ",
+      "en": "Dinajpur-3, Dinajpur, Bangladesh"
+    },
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Dinajpur-3%20MP%20Office%2C%20Dinajpur%2C%20Bangladesh&t=&z=16&ie=UTF8&iwloc=B&output=embed"
+  },
+  "socials": {
+    "facebook": "https://www.facebook.com/syedjahangiralamdinajpur3",
+    "youtube": "https://www.youtube.com/@SyedJahangirAlamDinajpur3",
+    "twitter": "https://x.com/SJAlamDinajpur3",
+    "instagram": "https://www.instagram.com/syedjahangiralamdinajpur3"
+  }
+}

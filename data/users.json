@@ -1,0 +1,21 @@
+[
+  {
+    "id": "d8cd19c5-85b9-4318-b5ee-a366c6f10e1d",
+    "name": "Administrator",
+    "username": "admin",
+    "passwordHash": "ea555458cc2c173762fa87a297d0ad56d99b37373337f38f0d2e9e3166e3fa65",
+    "role": "admin",
+    "createdAt": "2026-02-16T21:22:42.532Z",
+    "email": "admin@dinajpur3.local",
+    "isActive": true
+  },
+  {
+    "id": "604cf5ca-6118-49d3-98c7-0bc38f05ca71",
+    "name": "Md Mahfuzul Islam",
+    "email": "mahfuzulislam41@gmail.com",
+    "passwordHash": "$2b$12$r69.1uaTQzCnNKKN9P1cs.jB6A2MD/26uvdNZDV/b5ASJv88hTz72",
+    "role": "editor",
+    "createdAt": "2026-02-21T16:23:00.905Z",
+    "isActive": true
+  }
+]

@@ -1,0 +1,450 @@
+[
+  {
+    "id": "94119916-c1d2-4925-b512-975b83f75bd2",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:31:30.706Z",
+    "updatedAt": "2026-03-13T12:31:30.804Z",
+    "lastUserMessageAt": "2026-03-13T12:31:30.802Z",
+    "messages": [
+      {
+        "id": "dbd99663-5e66-470c-bcc8-cac9b042162e",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:31:30.706Z"
+      },
+      {
+        "id": "f1656ea0-75a6-4bc6-99af-b117d74be609",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:31:30.802Z"
+      },
+      {
+        "id": "e8bb5c51-cb84-4936-9533-b6227ca8eae3",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:31:30.804Z"
+      }
+    ]
+  },
+  {
+    "id": "3c12ed03-41a2-44f3-8877-36d0be3b5841",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:29:51.943Z",
+    "updatedAt": "2026-03-13T12:29:52.039Z",
+    "lastUserMessageAt": "2026-03-13T12:29:52.036Z",
+    "messages": [
+      {
+        "id": "969fa1a8-0854-46a5-9b7c-165b31c1f17f",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:29:51.943Z"
+      },
+      {
+        "id": "4dc08bb6-367f-42d8-bc3f-9691a585ae4b",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:29:52.036Z"
+      },
+      {
+        "id": "f5be0a8d-6372-4d5d-989f-a08b2a7687bb",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:29:52.039Z"
+      }
+    ]
+  },
+  {
+    "id": "0fe9d032-6f6f-4539-8492-4d03d2a28620",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:29:15.628Z",
+    "updatedAt": "2026-03-13T12:29:15.734Z",
+    "lastUserMessageAt": "2026-03-13T12:29:15.732Z",
+    "messages": [
+      {
+        "id": "f7ee68b5-56be-4560-90f8-839e64dfd184",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:29:15.628Z"
+      },
+      {
+        "id": "365482c0-cd87-4652-b17a-3c20d3f549fe",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:29:15.732Z"
+      },
+      {
+        "id": "eadcda22-0c97-42e0-8ccc-56b8769f09a1",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:29:15.734Z"
+      }
+    ]
+  },
+  {
+    "id": "8905a0b6-3a3f-48e1-b7cb-01e525198e9a",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:28:09.327Z",
+    "updatedAt": "2026-03-13T12:28:09.441Z",
+    "lastUserMessageAt": "2026-03-13T12:28:09.438Z",
+    "messages": [
+      {
+        "id": "f356f94b-aec3-4eee-b6f8-6e305616285e",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:28:09.327Z"
+      },
+      {
+        "id": "f9d397e6-6025-47d6-9a53-2848235cf585",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:28:09.438Z"
+      },
+      {
+        "id": "da314721-185e-4e3b-b434-bd595b0da526",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:28:09.441Z"
+      }
+    ]
+  },
+  {
+    "id": "dd8a23d5-fed2-4d70-88df-4483bc3fcaa4",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:27:49.393Z",
+    "updatedAt": "2026-03-13T12:27:49.501Z",
+    "lastUserMessageAt": "2026-03-13T12:27:49.497Z",
+    "messages": [
+      {
+        "id": "87aebcf9-feff-4b0a-8aa9-91294952d318",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:27:49.393Z"
+      },
+      {
+        "id": "23a30fd2-22a5-4531-8809-46dd00bfdf43",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:27:49.497Z"
+      },
+      {
+        "id": "dbfb68b3-2457-4ee7-9642-6f8d39b7fb7c",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:27:49.501Z"
+      }
+    ]
+  },
+  {
+    "id": "87f20b04-2e81-4ece-8242-ef770c16c3cb",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:26:52.451Z",
+    "updatedAt": "2026-03-13T12:26:52.547Z",
+    "lastUserMessageAt": "2026-03-13T12:26:52.544Z",
+    "messages": [
+      {
+        "id": "e1c99f0f-f59f-4264-966d-8f8658518227",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:26:52.451Z"
+      },
+      {
+        "id": "dd8851fc-8489-40c3-8af2-63fa63b9bdfd",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:26:52.544Z"
+      },
+      {
+        "id": "6b733d50-cb65-43b5-8522-d848ddf570fd",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:26:52.547Z"
+      }
+    ]
+  },
+  {
+    "id": "86f3e296-5683-4549-806a-1f0085f5f015",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:26:10.647Z",
+    "updatedAt": "2026-03-13T12:26:10.759Z",
+    "lastUserMessageAt": "2026-03-13T12:26:10.755Z",
+    "messages": [
+      {
+        "id": "985d0b5f-b59c-4bf2-9713-85a6d99193ab",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:26:10.647Z"
+      },
+      {
+        "id": "b0b3a26d-c20f-4d9a-8ff7-d47cb1959b23",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:26:10.755Z"
+      },
+      {
+        "id": "c449de96-e861-4cf9-ae1e-25ab414865a1",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:26:10.759Z"
+      }
+    ]
+  },
+  {
+    "id": "7fc8482b-bf8a-4daf-b715-8d88cf71a1cf",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:25:04.788Z",
+    "updatedAt": "2026-03-13T12:25:04.899Z",
+    "lastUserMessageAt": "2026-03-13T12:25:04.897Z",
+    "messages": [
+      {
+        "id": "30c2a944-73e3-4c29-98ce-6a5b18dbe2e4",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:25:04.788Z"
+      },
+      {
+        "id": "e9d92f31-4abf-4f29-a4da-2a6fb11af7dc",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:25:04.897Z"
+      },
+      {
+        "id": "62959c72-c9b0-491b-89d9-6396dc3d14b9",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:25:04.899Z"
+      }
+    ]
+  },
+  {
+    "id": "02eaa7fc-68a0-48af-8157-a360179730b5",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:23:48.539Z",
+    "updatedAt": "2026-03-13T12:23:48.646Z",
+    "lastUserMessageAt": "2026-03-13T12:23:48.642Z",
+    "messages": [
+      {
+        "id": "dfcbafdf-f418-4ee2-8f7f-da558fc6b480",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:23:48.539Z"
+      },
+      {
+        "id": "95e49439-7ca7-42d4-a0d0-0dad0f39f891",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:23:48.642Z"
+      },
+      {
+        "id": "ae7212d4-29b1-4045-b39a-fc9eac5b55bd",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:23:48.646Z"
+      }
+    ]
+  },
+  {
+    "id": "15dd02f5-b1a2-4904-9bfe-9df9189781e7",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:10:42.397Z",
+    "updatedAt": "2026-03-13T12:10:42.512Z",
+    "lastUserMessageAt": "2026-03-13T12:10:42.509Z",
+    "messages": [
+      {
+        "id": "78e43ab5-929b-4deb-a048-b87e3d529c58",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:10:42.397Z"
+      },
+      {
+        "id": "24984f17-cddf-4951-9eb8-26dbb31c7591",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:10:42.509Z"
+      },
+      {
+        "id": "e5ee7e1f-88e5-4758-857a-24ba79b0a9ca",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:10:42.512Z"
+      }
+    ]
+  },
+  {
+    "id": "a743314b-8636-4729-9572-6b64c55dfbba",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:06:15.466Z",
+    "updatedAt": "2026-03-13T12:06:15.568Z",
+    "lastUserMessageAt": "2026-03-13T12:06:15.565Z",
+    "messages": [
+      {
+        "id": "787aa45e-0be5-4a79-9c77-e70affc4d980",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:06:15.466Z"
+      },
+      {
+        "id": "e0dd2b40-7fac-4a91-bd63-505e1917c497",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:06:15.565Z"
+      },
+      {
+        "id": "91c7808b-d28d-4ddd-a7f8-d2299075b226",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:06:15.568Z"
+      }
+    ]
+  },
+  {
+    "id": "f414241b-765e-408b-8426-31e2a23a1370",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:05:36.204Z",
+    "updatedAt": "2026-03-13T12:05:36.301Z",
+    "lastUserMessageAt": "2026-03-13T12:05:36.298Z",
+    "messages": [
+      {
+        "id": "4c4fdbd5-156d-45b0-a2cd-6837b4d703bb",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:05:36.204Z"
+      },
+      {
+        "id": "61798c2b-30b6-4d4b-8325-082b9b826164",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:05:36.298Z"
+      },
+      {
+        "id": "791959bf-6a8a-4eea-8478-4639e213a134",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:05:36.301Z"
+      }
+    ]
+  },
+  {
+    "id": "ae68d2ed-3f9f-4d53-bd6e-180c33f929ff",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:05:20.023Z",
+    "updatedAt": "2026-03-13T12:05:20.136Z",
+    "lastUserMessageAt": "2026-03-13T12:05:20.133Z",
+    "messages": [
+      {
+        "id": "7ce2f47f-dfae-4963-84fb-2637347ada34",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:05:20.023Z"
+      },
+      {
+        "id": "5d5139b7-0868-4612-ab84-aa0b78a06581",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:05:20.133Z"
+      },
+      {
+        "id": "e7d4a1c6-1b15-45e9-b921-6d6e01d724e3",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:05:20.136Z"
+      }
+    ]
+  },
+  {
+    "id": "92d6b2d2-dda3-4e93-a66b-7d8d3b8b00a7",
+    "name": "Smoke QA",
+    "phone": "01700000000",
+    "lang": "en",
+    "category": "government_projects",
+    "status": "open",
+    "requiresManualReply": true,
+    "createdAt": "2026-03-13T12:03:53.329Z",
+    "updatedAt": "2026-03-13T12:03:53.442Z",
+    "lastUserMessageAt": "2026-03-13T12:03:53.440Z",
+    "messages": [
+      {
+        "id": "63499d28-0590-4639-9e7f-47d2fa5f9dd0",
+        "sender": "bot",
+        "text": "Welcome to Syed Jahangir Alam's office. Please share project name, location, and your government-project query.",
+        "createdAt": "2026-03-13T12:03:53.329Z"
+      },
+      {
+        "id": "fb1e5302-f73b-4402-86a4-bde2e2debe2e",
+        "sender": "user",
+        "text": "Please share project status.",
+        "createdAt": "2026-03-13T12:03:53.440Z"
+      },
+      {
+        "id": "6acf71f3-7399-4201-92e6-18e96552711d",
+        "sender": "bot",
+        "text": "Thanks. Your issue is noted. Share more specifics for faster guidance, otherwise this will be forwarded to the office team.",
+        "createdAt": "2026-03-13T12:03:53.442Z"
+      }
+    ]
+  }
+]

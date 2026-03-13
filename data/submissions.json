@@ -1,0 +1,35 @@
+[
+  {
+    "id": "0aed39ef-dfb8-4604-b533-abf4fc69fbb8",
+    "name": "Md Mahfuzul Islam",
+    "phone": "+8801718615265",
+    "email": "mahfuzulislam41@gmail.com",
+    "category": "suggestion",
+    "unionWard": "10",
+    "area": "Baluadanga, Sadar, Dinajpur",
+    "subject": "Proposal for MP Website",
+    "message": "Dear Sir, \nThis is the proposal for your complete digital MP office. \n\nRegards,\nMd Mahfuzul Islam \nProject Manager, Azm Labs",
+    "consentGiven": true,
+    "isPrivate": true,
+    "attachmentUrl": "/uploads/contact/azm_labs_dinajpur3_proposal_en-1771689580376-5af1c361.pdf",
+    "status": "in_review",
+    "createdAt": "2026-02-21T16:02:32.044Z",
+    "updatedAt": "2026-03-13T14:27:32.079Z"
+  },
+  {
+    "id": "2a89ebb4-ca4d-4c26-bb9c-f5abbf05ee75",
+    "name": "sadhadsba",
+    "phone": "00010101001",
+    "email": "mamamW@hajdan.com",
+    "category": "general",
+    "unionWard": "baluadanga",
+    "area": "baluadanga",
+    "subject": "dasdsdasds",
+    "message": "adasdadadasd",
+    "consentGiven": true,
+    "isPrivate": true,
+    "status": "new",
+    "createdAt": "2026-02-16T22:36:33.532Z",
+    "updatedAt": "2026-02-20T17:31:44.049Z"
+  }
+]
