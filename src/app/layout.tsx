@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description: "Official public service portal for Syed Jahangir Alam, MP, Dinajpur-3 constituency.",
     images: [
       {
-        url: "/uploads/images/chatgpt-image-feb-21-2026-12_19_15-am-1771611587507-0bf69a4b.png",
+        url: "/media/cover-bnp-rally.png",
         width: 1200,
         height: 630,
         alt: "Syed Jahangir Alam official portal"
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Syed Jahangir Alam, MP | Dinajpur-3",
     description: "Official public service portal for Syed Jahangir Alam, MP, Dinajpur-3 constituency.",
-    images: ["/uploads/images/chatgpt-image-feb-21-2026-12_19_15-am-1771611587507-0bf69a4b.png"]
+    images: ["/media/cover-bnp-rally.png"]
   },
   robots: {
     index: true,

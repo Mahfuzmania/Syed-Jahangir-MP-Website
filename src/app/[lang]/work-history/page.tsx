@@ -14,18 +14,11 @@ export default async function WorkHistoryPage({ params }: { params: Promise<{ la
 
   const content = await getSiteContent();
   const copy = t(lang);
-  const isBangla = lang === "bn";
+  const pageCopy = content.pageCopy.workHistory;
 
   return (
     <div className="space-y-6">
-      <SectionTitle
-        title={copy.work}
-        description={
-          isBangla
-            ? "পূর্ববর্তী কাজের অগ্রগতি, মাঠ পর্যায়ের ফলাফল, এবং জনসেবামূলক প্রভাব।"
-            : "Highlights of previous development work, field-level outcomes, and public impact."
-        }
-      />
+      <SectionTitle title={copy.work} description={translate(lang, pageCopy.pageDescription)} />
 
       <div className="grid gap-4 md:grid-cols-2">
         {content.workHistory.map((item) => (
@@ -41,14 +34,8 @@ export default async function WorkHistoryPage({ params }: { params: Promise<{ la
 
       <div className="card-surface flex flex-col gap-3 p-6 md:flex-row md:items-center md:justify-between">
         <div>
-          <h3 className="text-xl font-bold text-brand-green">
-            {isBangla ? "আপনার এলাকার সমস্যা বা পরামর্শ পাঠান" : "Send your local issue or suggestion"}
-          </h3>
-          <p className="text-sm text-brand-ink/75">
-            {isBangla
-              ? "আপনার বার্তা সরাসরি পাঠান, দ্রুত ফলো-আপ পান, এবং রেফারেন্স আইডি সংরক্ষণ করুন।"
-              : "Send your message directly for faster follow-up and keep your reference ID."}
-          </p>
+          <h3 className="text-xl font-bold text-brand-green">{translate(lang, pageCopy.ctaTitle)}</h3>
+          <p className="text-sm text-brand-ink/75">{translate(lang, pageCopy.ctaText)}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Link href={`/${lang}/write-to-mp`} className="rounded-full bg-brand-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-green">
@@ -64,8 +51,9 @@ export default async function WorkHistoryPage({ params }: { params: Promise<{ la
       </div>
 
       <div className="card-surface overflow-hidden p-3">
-        <Image src={content.candidate.heroImage} alt="Dinajpur landscape" width={1800} height={700} className="h-64 w-full rounded-2xl object-cover" />
+        <Image src={content.candidate.heroImage} alt={translate(lang, pageCopy.heroImageAlt)} width={1800} height={700} className="h-64 w-full rounded-2xl object-cover" />
       </div>
     </div>
   );
 }
+

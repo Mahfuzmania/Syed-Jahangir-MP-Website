@@ -15,7 +15,7 @@ export function FieldInput({
   label: string;
   value: string;
   onChange: (value: string) => void;
-  type?: "text" | "email" | "url" | "date" | "number";
+  type?: "text" | "email" | "url" | "date" | "number" | "datetime-local";
 }) {
   return (
     <label className="space-y-1">

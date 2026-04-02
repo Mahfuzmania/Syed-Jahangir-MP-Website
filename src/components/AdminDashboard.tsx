@@ -131,6 +131,18 @@ export function AdminDashboard({
   const [roleDraftByUserId, setRoleDraftByUserId] = useState<Record<string, UserRole>>(
     () => Object.fromEntries(initialUsers.map((entry) => [entry.id, entry.role])) as Record<string, UserRole>
   );
+  const [profileDraftByUserId, setProfileDraftByUserId] = useState<Record<string, { name: string; email: string }>>(
+    () =>
+      Object.fromEntries(
+        initialUsers.map((entry) => [
+          entry.id,
+          {
+            name: entry.name,
+            email: entry.email
+          }
+        ])
+      ) as Record<string, { name: string; email: string }>
+  );
   const [resetPasswordByUserId, setResetPasswordByUserId] = useState<Record<string, string>>({});
   const [changingPassword, setChangingPassword] = useState(false);
   const [passwordStatus, setPasswordStatus] = useState("");
@@ -212,6 +224,8 @@ export function AdminDashboard({
       userEmail: isBangla ? "ইমেইল" : "Email",
       userName: isBangla ? "নাম" : "Name",
       role: isBangla ? "রোল" : "Role",
+      editUser: isBangla ? "ইউজার তথ্য সম্পাদনা" : "Edit User Info",
+      saveProfile: isBangla ? "তথ্য সংরক্ষণ" : "Save Info",
       usersSummary: isBangla ? "ইউজার সারাংশ" : "User Summary",
       totalUsers: isBangla ? "মোট ইউজার" : "Total Users",
       activeUsers: isBangla ? "সক্রিয় ইউজার" : "Active Users",
@@ -219,7 +233,7 @@ export function AdminDashboard({
       reports: isBangla ? "মাসিক রিপোর্ট" : "Monthly Reports",
       videos: isBangla ? "ভিডিও" : "Videos",
       projects: isBangla ? "সরকারি প্রকল্প" : "Gov Projects",
-      profileBooks: isBangla ? "পরিচিতির বই" : "Profile Books",
+      profileHighlights: isBangla ? "পরিচিতির হাইলাইট" : "Profile Highlights",
       footerCta: isBangla ? "ফুটার CTA" : "Footer CTA",
       chatbot: isBangla ? "চ্যাটবট" : "Chatbot",
       chatbotInbox: isBangla ? "চ্যাটবট: ইনবক্স" : "Chatbot Inbox",
@@ -344,18 +358,22 @@ export function AdminDashboard({
       { label: labels.reports, value: initialContent.monthlyReports.length },
       { label: labels.videos, value: initialContent.videos.length },
       { label: labels.projects, value: initialContent.governmentProjects.length },
-      { label: labels.profileBooks, value: initialContent.profileSection.books.length },
+      {
+        label: labels.profileHighlights,
+        value: Math.max(initialContent.profileSection.collectionPoints.bn.length, initialContent.profileSection.collectionPoints.en.length)
+      },
       { label: labels.footerCta, value: 1 }
     ],
     [
       initialContent.governmentProjects.length,
       initialContent.monthlyReports.length,
       initialContent.news.length,
-      initialContent.profileSection.books.length,
+      initialContent.profileSection.collectionPoints.bn.length,
+      initialContent.profileSection.collectionPoints.en.length,
       initialContent.videos.length,
       labels.footerCta,
       labels.newsPosts,
-      labels.profileBooks,
+      labels.profileHighlights,
       labels.projects,
       labels.reports,
       labels.videos
@@ -442,6 +460,13 @@ export function AdminDashboard({
 
       setUsers((prev) => [createdUser, ...prev]);
       setRoleDraftByUserId((prev) => ({ ...prev, [createdUser.id]: createdUser.role }));
+      setProfileDraftByUserId((prev) => ({
+        ...prev,
+        [createdUser.id]: {
+          name: createdUser.name,
+          email: createdUser.email
+        }
+      }));
       setNewUser({ name: "", email: "", password: "", role: "editor" });
       setUserStatus(isBangla ? "ইউজার তৈরি হয়েছে" : "User created successfully");
     } catch (error) {
@@ -455,6 +480,7 @@ export function AdminDashboard({
     userId: string,
     payload: {
       name?: string;
+      email?: string;
       role?: UserRole;
       isActive?: boolean;
       newPassword?: string;
@@ -478,6 +504,13 @@ export function AdminDashboard({
 
       setUsers((prev) => prev.map((entry) => (entry.id === updatedUser.id ? updatedUser : entry)));
       setRoleDraftByUserId((prev) => ({ ...prev, [updatedUser.id]: updatedUser.role }));
+      setProfileDraftByUserId((prev) => ({
+        ...prev,
+        [updatedUser.id]: {
+          name: updatedUser.name,
+          email: updatedUser.email
+        }
+      }));
       setResetPasswordByUserId((prev) => ({ ...prev, [updatedUser.id]: "" }));
       setUserStatus(isBangla ? "ইউজার আপডেট হয়েছে" : "User updated successfully");
     } catch (error) {
@@ -509,6 +542,11 @@ export function AdminDashboard({
 
       setUsers((prev) => prev.filter((entry) => entry.id !== userId));
       setRoleDraftByUserId((prev) => {
+        const next = { ...prev };
+        delete next[userId];
+        return next;
+      });
+      setProfileDraftByUserId((prev) => {
         const next = { ...prev };
         delete next[userId];
         return next;
@@ -1152,6 +1190,7 @@ export function AdminDashboard({
                 {sortedUsers.map((user) => {
                   const resetValue = resetPasswordByUserId[user.id] ?? "";
                   const roleDraft = roleDraftByUserId[user.id] ?? user.role;
+                  const profileDraft = profileDraftByUserId[user.id] ?? { name: user.name, email: user.email };
                   const pending = mutatingUserId === user.id;
                   return (
                     <article key={user.id} className="rounded-2xl border border-brand-ink/10 bg-white p-4 shadow-[0_6px_20px_rgba(16,34,24,0.06)]">
@@ -1178,6 +1217,59 @@ export function AdminDashboard({
                       </div>
 
                       <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                        <div className="rounded-xl border border-brand-ink/10 bg-brand-surface/70 p-3">
+                          <p className="text-xs font-semibold uppercase tracking-wide text-brand-ink/60">{labels.editUser}</p>
+                          <div className="mt-2 grid gap-2">
+                            <input
+                              value={profileDraft.name}
+                              onChange={(event) =>
+                                setProfileDraftByUserId((prev) => ({
+                                  ...prev,
+                                  [user.id]: {
+                                    ...profileDraft,
+                                    name: event.target.value
+                                  }
+                                }))
+                              }
+                              placeholder={labels.userName}
+                              className={inputClassName}
+                              disabled={pending}
+                            />
+                            <input
+                              value={profileDraft.email}
+                              onChange={(event) =>
+                                setProfileDraftByUserId((prev) => ({
+                                  ...prev,
+                                  [user.id]: {
+                                    ...profileDraft,
+                                    email: event.target.value
+                                  }
+                                }))
+                              }
+                              type="email"
+                              placeholder={labels.userEmail}
+                              className={inputClassName}
+                              disabled={pending}
+                            />
+                            <button
+                              type="button"
+                              disabled={
+                                pending ||
+                                (profileDraft.name.trim() === user.name && profileDraft.email.trim().toLowerCase() === user.email.toLowerCase())
+                              }
+                              onClick={() =>
+                                void updateUser(user.id, {
+                                  name: profileDraft.name.trim(),
+                                  email: profileDraft.email.trim().toLowerCase()
+                                })
+                              }
+                              className="w-fit rounded-full border border-brand-green/40 px-4 py-2 text-xs font-bold text-brand-green disabled:opacity-60"
+                            >
+                              {labels.saveProfile}
+                            </button>
+                          </div>
+                        </div>
+
                         <div className="rounded-xl border border-brand-ink/10 bg-brand-surface/70 p-3">
                           <p className="text-xs font-semibold uppercase tracking-wide text-brand-ink/60">{labels.updateRole}</p>
                           <div className="mt-2 flex flex-wrap items-center gap-2">

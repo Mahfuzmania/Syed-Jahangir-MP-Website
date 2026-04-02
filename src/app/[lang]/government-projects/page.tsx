@@ -3,14 +3,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SectionTitle } from "@/components/SectionTitle";
 import { isLang, translate } from "@/lib/i18n";
-import { GovernmentProjectStatus } from "@/lib/types";
+import { GovernmentProjectStatus, SiteContent } from "@/lib/types";
 import { getSiteContent } from "@/lib/storage";
 
-function statusLabel(status: GovernmentProjectStatus, isBangla: boolean) {
-  if (status === "planned") return isBangla ? "পরিকল্পিত" : "Planned";
-  if (status === "running") return isBangla ? "চলমান" : "Running";
-  if (status === "completed") return isBangla ? "সমাপ্ত" : "Completed";
-  return isBangla ? "স্থগিত" : "On Hold";
+function statusLabel(
+  status: GovernmentProjectStatus,
+  labels: SiteContent["pageCopy"]["governmentProjects"]["statusLabels"],
+  lang: "bn" | "en"
+) {
+  if (status === "planned") return translate(lang, labels.planned);
+  if (status === "running") return translate(lang, labels.running);
+  if (status === "completed") return translate(lang, labels.completed);
+  return translate(lang, labels.onHold);
 }
 
 function statusClass(status: GovernmentProjectStatus) {
@@ -34,19 +38,13 @@ export default async function GovernmentProjectsPage({ params }: { params: Promi
     notFound();
   }
 
-  const isBangla = lang === "bn";
   const content = await getSiteContent();
+  const pageCopy = content.pageCopy.governmentProjects;
+  const statusCopy = pageCopy.statusLabels;
 
   return (
     <div className="space-y-6">
-      <SectionTitle
-        title={isBangla ? "সরকারি উন্নয়ন প্রকল্পসমূহ" : "Government Development Projects"}
-        description={
-          isBangla
-            ? "প্রকল্পভিত্তিক বাজেট, ব্যয়, অগ্রগতি, বাস্তবায়নকারী সংস্থা ও বাস্তবায়ন ধাপ এক নজরে।"
-            : "Transparent project-wise budget, expenditure, progress, implementing agency, and execution phase."
-        }
-      />
+      <SectionTitle title={translate(lang, pageCopy.pageTitle)} description={translate(lang, pageCopy.pageDescription)} />
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {content.governmentProjects.map((project) => (
@@ -58,7 +56,7 @@ export default async function GovernmentProjectsPage({ params }: { params: Promi
               <div className="flex items-center justify-between gap-2">
                 <p className="text-xs font-semibold text-brand-ink/65">{project.sector}</p>
                 <span className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${statusClass(project.status)}`}>
-                  {statusLabel(project.status, isBangla)}
+                  {statusLabel(project.status, statusCopy, lang)}
                 </span>
               </div>
               <h2 className="mt-2 text-lg font-bold text-brand-green">{translate(lang, project.title)}</h2>
@@ -69,12 +67,12 @@ export default async function GovernmentProjectsPage({ params }: { params: Promi
               </div>
 
               <div className="mt-3 rounded-xl border border-brand-ink/10 bg-slate-50 p-3 text-xs text-brand-ink/75">
-                <p>{isBangla ? "মোট বাজেট" : "Total Budget"}: {formatBdt(project.budgetTotal, lang)}</p>
-                <p>{isBangla ? "ব্যয়" : "Spent"}: {formatBdt(project.spentAmount, lang)}</p>
-                <p>{isBangla ? "অগ্রগতি" : "Progress"}: {project.progressPercent}%</p>
+                <p>{translate(lang, pageCopy.totalBudgetLabel)}: {formatBdt(project.budgetTotal, lang)}</p>
+                <p>{translate(lang, pageCopy.spentLabel)}: {formatBdt(project.spentAmount, lang)}</p>
+                <p>{translate(lang, pageCopy.progressLabel)}: {project.progressPercent}%</p>
               </div>
               <Link href={`/${lang}/government-projects/${project.slug}`} className="mt-4 inline-flex text-sm font-bold text-brand-red hover:underline">
-                {isBangla ? "বিস্তারিত দেখুন" : "Full Breakdown"}
+                {translate(lang, pageCopy.fullBreakdownLabel)}
               </Link>
             </div>
           </article>

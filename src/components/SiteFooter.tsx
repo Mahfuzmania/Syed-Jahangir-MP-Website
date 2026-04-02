@@ -87,7 +87,12 @@ export function SiteFooter({ lang, content }: { lang: Lang; content: SiteContent
   const year = new Date().getFullYear();
   const candidateName = translate(lang, content.candidate.name);
   const honorific = lang === "bn" ? "এমপি" : "MP";
-
+  const displayPhone =
+    content.contact.phone?.trim() ||
+    (lang === "bn" ? "অফিসিয়াল ফোন শীঘ্রই প্রকাশ করা হবে" : "Official phone will be published soon");
+  const displayEmail =
+    content.contact.email?.trim() ||
+    (lang === "bn" ? "অফিসিয়াল ইমেইল শীঘ্রই প্রকাশ করা হবে" : "Official email will be published soon");
   const socialItems = [
     { key: "facebook", href: content.socials.facebook, label: "Facebook" },
     { key: "youtube", href: content.socials.youtube, label: "YouTube" },
@@ -152,11 +157,11 @@ export function SiteFooter({ lang, content }: { lang: Lang; content: SiteContent
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                 <p className="inline-flex items-center gap-2 whitespace-nowrap">
                   <ContactIcon kind="phone" className="h-4 w-4" />
-                  {content.contact.phone}
+                  {displayPhone}
                 </p>
                 <p className="inline-flex items-center gap-2 whitespace-nowrap">
                   <ContactIcon kind="email" className="h-4 w-4" />
-                  {content.contact.email}
+                  {displayEmail}
                 </p>
               </div>
               <p className="inline-flex items-start gap-2 leading-relaxed text-white/82">
@@ -195,7 +200,7 @@ export function SiteFooter({ lang, content }: { lang: Lang; content: SiteContent
                 className="inline-flex items-center justify-between rounded-full border border-white/30 bg-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:bg-white hover:text-brand-green"
               >
                 <span>{item.label}</span>
-                <span aria-hidden="true">→</span>
+                <span aria-hidden="true">&rarr;</span>
               </Link>
             ))}
           </div>

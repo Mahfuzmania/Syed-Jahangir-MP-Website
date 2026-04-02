@@ -17,8 +17,16 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
 
   const content = await getSiteContent();
   const copy = t(lang);
+  const pageCopy = content.pageCopy.contact;
   const localizedAddress = translate(lang, content.contact.address);
   const mapEmbedUrl = content.contact.mapEmbedUrl?.trim() || buildOfficeMapUrl(localizedAddress);
+  const displayPhone =
+    content.contact.phone?.trim() ||
+    (lang === "bn" ? "অফিসিয়াল ফোন নম্বর শীঘ্রই প্রকাশ করা হবে" : "Official office phone will be published soon");
+  const displayEmail =
+    content.contact.email?.trim() ||
+    (lang === "bn" ? "অফিসিয়াল ইমেইল শীঘ্রই প্রকাশ করা হবে" : "Official email will be published soon");
+  const facebookUrl = content.socials.facebook?.trim();
 
   return (
     <div className="space-y-6">
@@ -35,12 +43,12 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
             <div className="mt-4 space-y-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wide text-brand-ink/55">{copy.phoneLabel}</p>
-                <p className="mt-1 text-xl font-bold text-brand-green">{content.contact.phone}</p>
+                <p className="mt-1 text-lg font-bold text-brand-green">{displayPhone}</p>
               </div>
 
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-ink/55">Email</p>
-                <p className="mt-1 text-lg font-semibold text-brand-green">{content.contact.email}</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-ink/55">{translate(lang, pageCopy.emailLabel)}</p>
+                <p className="mt-1 text-lg font-semibold text-brand-green">{displayEmail}</p>
               </div>
 
               <div>
@@ -49,12 +57,24 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
               </div>
             </div>
 
-            <Link
-              href={`/${lang}/write-to-mp`}
-              className="mt-6 inline-flex rounded-full bg-brand-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-green"
-            >
-              {copy.writeToMp}
-            </Link>
+            <div className="mt-6 flex flex-wrap gap-2">
+              <Link
+                href={`/${lang}/write-to-mp`}
+                className="inline-flex rounded-full bg-brand-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-green"
+              >
+                {copy.writeToMp}
+              </Link>
+              {facebookUrl ? (
+                <a
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex rounded-full border border-brand-green/35 bg-white px-5 py-2.5 text-sm font-bold text-brand-green transition hover:bg-brand-green hover:text-white"
+                >
+                  {translate(lang, pageCopy.facebookInboxLabel)}
+                </a>
+              ) : null}
+            </div>
           </div>
 
           <div className="rounded-2xl border border-brand-green/15 bg-white/85 p-3">
@@ -77,3 +97,4 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
     </div>
   );
 }
+

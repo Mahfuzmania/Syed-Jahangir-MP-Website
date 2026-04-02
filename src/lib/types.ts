@@ -96,20 +96,10 @@ export type GovernmentProject = {
   image: string;
 };
 
-export type ProfileBook = {
-  id: string;
-  cover: string;
-  title: LocalizedText;
-  summary: LocalizedText;
-};
-
 export type ProfileSectionContent = {
   biographyTitle: LocalizedText;
   biographyText: LocalizedText;
   activitiesTitle: LocalizedText;
-  booksTitle: LocalizedText;
-  books: ProfileBook[];
-  collectionTitle: LocalizedText;
   collectionPoints: {
     bn: string[];
     en: string[];
@@ -139,10 +129,128 @@ export type SocialLinks = {
   instagram: string;
 };
 
+export type NoticeDisplayScope = "home" | "all_pages";
+export type NoticeScrollDirection = "rtl" | "ltr";
+
+export type NoticeBarItem = {
+  id: string;
+  text: LocalizedText;
+  link: string;
+  isUrgent: boolean;
+  isActive: boolean;
+  startAt: string;
+  endAt: string;
+  order: number;
+};
+
+export type NoticeBarContent = {
+  enabled: boolean;
+  showOn: NoticeDisplayScope;
+  speed: number;
+  direction: NoticeScrollDirection;
+  prefixLabel: LocalizedText;
+  items: NoticeBarItem[];
+};
+
+export type GovernmentProjectStatusCopy = {
+  planned: LocalizedText;
+  running: LocalizedText;
+  completed: LocalizedText;
+  onHold: LocalizedText;
+};
+
+export type HomePageCopy = {
+  heroTag: LocalizedText;
+  commitmentsLabel: LocalizedText;
+  runningProjectsLabel: LocalizedText;
+  reportsLabel: LocalizedText;
+  directServiceTag: LocalizedText;
+  directServiceTitle: LocalizedText;
+  directServiceText: LocalizedText;
+  statusTag: LocalizedText;
+  statusTitle: LocalizedText;
+  statusText: LocalizedText;
+  transparencyTag: LocalizedText;
+  transparencyTitle: LocalizedText;
+  transparencyText: LocalizedText;
+  projectsDescription: LocalizedText;
+  monthlyReportsTitle: LocalizedText;
+  publishedLabel: LocalizedText;
+  mediaDescription: LocalizedText;
+  ctaTitle: LocalizedText;
+  ctaText: LocalizedText;
+  budgetLabel: LocalizedText;
+  spentLabel: LocalizedText;
+  manifestoTag: LocalizedText;
+  manifestoText: LocalizedText;
+};
+
+export type ProfilePageCopy = {
+  briefBioLabel: LocalizedText;
+  activitiesLabel: LocalizedText;
+};
+
+export type DevelopmentPageCopy = {
+  pageDescription: LocalizedText;
+  monthlyReportsNavLabel: LocalizedText;
+  viewAllLabel: LocalizedText;
+  budgetLabel: LocalizedText;
+  spentLabel: LocalizedText;
+  progressLabel: LocalizedText;
+  monthlyReportsTitle: LocalizedText;
+  monthlyReportsDescription: LocalizedText;
+};
+
+export type GovernmentProjectsPageCopy = {
+  pageTitle: LocalizedText;
+  pageDescription: LocalizedText;
+  totalBudgetLabel: LocalizedText;
+  spentLabel: LocalizedText;
+  progressLabel: LocalizedText;
+  fullBreakdownLabel: LocalizedText;
+  statusLabels: GovernmentProjectStatusCopy;
+};
+
+export type GovernmentProjectDetailsPageCopy = {
+  backToListLabel: LocalizedText;
+  sectorLabel: LocalizedText;
+  locationLabel: LocalizedText;
+  implementingAgencyLabel: LocalizedText;
+  totalBudgetLabel: LocalizedText;
+  spentLabel: LocalizedText;
+  progressLabel: LocalizedText;
+  phaseLabel: LocalizedText;
+  beneficiariesLabel: LocalizedText;
+};
+
+export type WorkHistoryPageCopy = {
+  pageDescription: LocalizedText;
+  ctaTitle: LocalizedText;
+  ctaText: LocalizedText;
+  heroImageAlt: LocalizedText;
+};
+
+export type ContactPageCopy = {
+  emailLabel: LocalizedText;
+  facebookInboxLabel: LocalizedText;
+};
+
+export type PublicPageCopy = {
+  home: HomePageCopy;
+  profile: ProfilePageCopy;
+  development: DevelopmentPageCopy;
+  governmentProjects: GovernmentProjectsPageCopy;
+  governmentProjectDetails: GovernmentProjectDetailsPageCopy;
+  workHistory: WorkHistoryPageCopy;
+  contact: ContactPageCopy;
+};
+
 export type SiteContent = {
   candidate: CandidateProfile;
   profileSection: ProfileSectionContent;
   preFooterCta: PreFooterCtaContent;
+  noticeBar: NoticeBarContent;
+  pageCopy: PublicPageCopy;
   commitments: Commitment[];
   workHistory: WorkItem[];
   gallery: GalleryItem[];

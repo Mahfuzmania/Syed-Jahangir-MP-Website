@@ -15,17 +15,14 @@ export default async function ProfilePage({ params }: { params: Promise<{ lang: 
   const text = t(lang);
   const content = await getSiteContent();
   const isBangla = lang === "bn";
-
-  const labels = {
-    briefBio: isBangla ? "জীবনী (সংক্ষেপ)" : "Short Biography",
-    activities: isBangla ? "কার্যক্রম (সংক্ষেপ)" : "Key Activities"
-  };
+  const honorific = isBangla ? "এমপি" : "MP";
+  const pageCopy = content.pageCopy.profile;
 
   return (
     <div className="space-y-7">
       <SectionTitle
         eyebrow={text.profile}
-        title={`${translate(lang, content.candidate.name)}, MP`}
+        title={`${translate(lang, content.candidate.name)}, ${honorific}`}
         description={translate(lang, content.candidate.shortTitle)}
       />
 
@@ -43,7 +40,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ lang: 
         </div>
 
         <article className="card-surface p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-green/80">{labels.briefBio}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-green/80">{translate(lang, pageCopy.briefBioLabel)}</p>
           <h2 className="mt-2 text-2xl font-bold text-brand-green">{translate(lang, content.profileSection.biographyTitle)}</h2>
           <p className="mt-4 leading-relaxed text-brand-ink/85">{translate(lang, content.profileSection.biographyText)}</p>
 
@@ -64,7 +61,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ lang: 
       </section>
 
       <section className="card-surface p-5 sm:p-6 md:p-7">
-        <h3 className="text-lg font-bold text-brand-green">{labels.activities}</h3>
+        <h3 className="text-lg font-bold text-brand-green">{translate(lang, pageCopy.activitiesLabel)}</h3>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {content.workHistory.map((item) => (
             <article key={item.id} className="rounded-2xl border border-brand-green/15 bg-white/70 p-4">
@@ -84,3 +81,4 @@ export default async function ProfilePage({ params }: { params: Promise<{ lang: 
     </div>
   );
 }
+

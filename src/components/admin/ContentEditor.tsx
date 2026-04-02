@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { useMemo, useState } from "react";
-import { GovernmentProjectStatus, SiteContent } from "@/lib/types";
+import { GovernmentProjectStatus, NoticeDisplayScope, NoticeScrollDirection, SiteContent } from "@/lib/types";
 import { BilingualField, createId, FieldInput, FieldTextArea, slugify, UploadUrlField } from "@/components/admin/FieldParts";
 
 type Labels = {
@@ -9,6 +9,8 @@ type Labels = {
   helper: string;
   quickNav: string;
   navProfile: string;
+  navNotice: string;
+  navPages: string;
   navContact: string;
   navCommitments: string;
   navNews: string;
@@ -33,6 +35,8 @@ type Labels = {
 
 type EditorSection =
   | "profile"
+  | "notice"
+  | "pages"
   | "profileDetails"
   | "cta"
   | "contact"
@@ -88,6 +92,12 @@ function normalize(content: SiteContent): SiteContent {
     bn: value.bn.trim(),
     en: value.en.trim()
   });
+  const cleanStatusCopy = (value: SiteContent["pageCopy"]["governmentProjects"]["statusLabels"]) => ({
+    planned: clean(value.planned),
+    running: clean(value.running),
+    completed: clean(value.completed),
+    onHold: clean(value.onHold)
+  });
   const cleanList = (value: { bn: string[]; en: string[] }) => ({
     bn: value.bn.map((item) => item.trim()).filter(Boolean),
     en: value.en.map((item) => item.trim()).filter(Boolean)
@@ -108,15 +118,6 @@ function normalize(content: SiteContent): SiteContent {
       biographyTitle: clean(content.profileSection.biographyTitle),
       biographyText: clean(content.profileSection.biographyText),
       activitiesTitle: clean(content.profileSection.activitiesTitle),
-      booksTitle: clean(content.profileSection.booksTitle),
-      books: content.profileSection.books.map((item) => ({
-        ...item,
-        id: item.id || createId("pb"),
-        cover: item.cover.trim(),
-        title: clean(item.title),
-        summary: clean(item.summary)
-      })),
-      collectionTitle: clean(content.profileSection.collectionTitle),
       collectionPoints: cleanList(content.profileSection.collectionPoints),
       officeButtonLabel: clean(content.profileSection.officeButtonLabel),
       facebookButtonLabel: clean(content.profileSection.facebookButtonLabel)
@@ -126,6 +127,97 @@ function normalize(content: SiteContent): SiteContent {
       description: clean(content.preFooterCta.description),
       volunteerButtonLabel: clean(content.preFooterCta.volunteerButtonLabel),
       writeToMpButtonLabel: clean(content.preFooterCta.writeToMpButtonLabel)
+    },
+    noticeBar: {
+      enabled: Boolean(content.noticeBar.enabled),
+      showOn: content.noticeBar.showOn === "all_pages" ? "all_pages" : "home",
+      speed: Math.min(120, Math.max(18, toSafeNumber(content.noticeBar.speed, 42))),
+      direction: content.noticeBar.direction === "ltr" ? "ltr" : "rtl",
+      prefixLabel: clean(content.noticeBar.prefixLabel),
+      items: content.noticeBar.items
+        .map((item, index) => ({
+          id: item.id || createId("notice"),
+          text: clean(item.text),
+          link: (item.link || "").trim(),
+          isUrgent: Boolean(item.isUrgent),
+          isActive: typeof item.isActive === "boolean" ? item.isActive : true,
+          startAt: (item.startAt || "").trim(),
+          endAt: (item.endAt || "").trim(),
+          order: toSafeNumber(item.order, index + 1)
+        }))
+        .filter((item) => item.text.bn || item.text.en)
+        .sort((left, right) => left.order - right.order)
+    },
+    pageCopy: {
+      home: {
+        heroTag: clean(content.pageCopy.home.heroTag),
+        commitmentsLabel: clean(content.pageCopy.home.commitmentsLabel),
+        runningProjectsLabel: clean(content.pageCopy.home.runningProjectsLabel),
+        reportsLabel: clean(content.pageCopy.home.reportsLabel),
+        directServiceTag: clean(content.pageCopy.home.directServiceTag),
+        directServiceTitle: clean(content.pageCopy.home.directServiceTitle),
+        directServiceText: clean(content.pageCopy.home.directServiceText),
+        statusTag: clean(content.pageCopy.home.statusTag),
+        statusTitle: clean(content.pageCopy.home.statusTitle),
+        statusText: clean(content.pageCopy.home.statusText),
+        transparencyTag: clean(content.pageCopy.home.transparencyTag),
+        transparencyTitle: clean(content.pageCopy.home.transparencyTitle),
+        transparencyText: clean(content.pageCopy.home.transparencyText),
+        projectsDescription: clean(content.pageCopy.home.projectsDescription),
+        monthlyReportsTitle: clean(content.pageCopy.home.monthlyReportsTitle),
+        publishedLabel: clean(content.pageCopy.home.publishedLabel),
+        mediaDescription: clean(content.pageCopy.home.mediaDescription),
+        ctaTitle: clean(content.pageCopy.home.ctaTitle),
+        ctaText: clean(content.pageCopy.home.ctaText),
+        budgetLabel: clean(content.pageCopy.home.budgetLabel),
+        spentLabel: clean(content.pageCopy.home.spentLabel),
+        manifestoTag: clean(content.pageCopy.home.manifestoTag),
+        manifestoText: clean(content.pageCopy.home.manifestoText)
+      },
+      profile: {
+        briefBioLabel: clean(content.pageCopy.profile.briefBioLabel),
+        activitiesLabel: clean(content.pageCopy.profile.activitiesLabel)
+      },
+      development: {
+        pageDescription: clean(content.pageCopy.development.pageDescription),
+        monthlyReportsNavLabel: clean(content.pageCopy.development.monthlyReportsNavLabel),
+        viewAllLabel: clean(content.pageCopy.development.viewAllLabel),
+        budgetLabel: clean(content.pageCopy.development.budgetLabel),
+        spentLabel: clean(content.pageCopy.development.spentLabel),
+        progressLabel: clean(content.pageCopy.development.progressLabel),
+        monthlyReportsTitle: clean(content.pageCopy.development.monthlyReportsTitle),
+        monthlyReportsDescription: clean(content.pageCopy.development.monthlyReportsDescription)
+      },
+      governmentProjects: {
+        pageTitle: clean(content.pageCopy.governmentProjects.pageTitle),
+        pageDescription: clean(content.pageCopy.governmentProjects.pageDescription),
+        totalBudgetLabel: clean(content.pageCopy.governmentProjects.totalBudgetLabel),
+        spentLabel: clean(content.pageCopy.governmentProjects.spentLabel),
+        progressLabel: clean(content.pageCopy.governmentProjects.progressLabel),
+        fullBreakdownLabel: clean(content.pageCopy.governmentProjects.fullBreakdownLabel),
+        statusLabels: cleanStatusCopy(content.pageCopy.governmentProjects.statusLabels)
+      },
+      governmentProjectDetails: {
+        backToListLabel: clean(content.pageCopy.governmentProjectDetails.backToListLabel),
+        sectorLabel: clean(content.pageCopy.governmentProjectDetails.sectorLabel),
+        locationLabel: clean(content.pageCopy.governmentProjectDetails.locationLabel),
+        implementingAgencyLabel: clean(content.pageCopy.governmentProjectDetails.implementingAgencyLabel),
+        totalBudgetLabel: clean(content.pageCopy.governmentProjectDetails.totalBudgetLabel),
+        spentLabel: clean(content.pageCopy.governmentProjectDetails.spentLabel),
+        progressLabel: clean(content.pageCopy.governmentProjectDetails.progressLabel),
+        phaseLabel: clean(content.pageCopy.governmentProjectDetails.phaseLabel),
+        beneficiariesLabel: clean(content.pageCopy.governmentProjectDetails.beneficiariesLabel)
+      },
+      workHistory: {
+        pageDescription: clean(content.pageCopy.workHistory.pageDescription),
+        ctaTitle: clean(content.pageCopy.workHistory.ctaTitle),
+        ctaText: clean(content.pageCopy.workHistory.ctaText),
+        heroImageAlt: clean(content.pageCopy.workHistory.heroImageAlt)
+      },
+      contact: {
+        emailLabel: clean(content.pageCopy.contact.emailLabel),
+        facebookInboxLabel: clean(content.pageCopy.contact.facebookInboxLabel)
+      }
     },
     commitments: content.commitments.map((item, index) => ({
       ...item,
@@ -238,7 +330,9 @@ export function ContentEditor({ lang, initialContent }: { lang: "bn" | "en"; ini
         : "Update information with forms. No JSON code is needed.",
       quickNav: isBangla ? "দ্রুত সেকশন নেভিগেশন" : "Quick Section Navigation",
       navProfile: isBangla ? "পরিচিতি" : "Profile",
-      navProfileDetails: isBangla ? "পরিচিতির লেখা ও বই" : "Profile Text & Books",
+      navNotice: isBangla ? "নোটিশ বার" : "Notice Bar",
+      navPages: isBangla ? "পেজ কপি" : "Page Copy",
+      navProfileDetails: isBangla ? "পরিচিতির লেখা" : "Profile Text",
       navCta: isBangla ? "ফুটার সিটিএ" : "Footer CTA",
       navContact: isBangla ? "যোগাযোগ" : "Contact",
       navCommitments: isBangla ? "অঙ্গীকার" : "Commitments",
@@ -268,6 +362,7 @@ export function ContentEditor({ lang, initialContent }: { lang: "bn" | "en"; ini
   const [activeSection, setActiveSection] = useState<EditorSection>("profile");
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState("");
+  const hasChanges = useMemo(() => JSON.stringify(draft) !== JSON.stringify(initialContent), [draft, initialContent]);
 
   const galleryStats = useMemo(() => {
     const albums = new Set(
@@ -289,6 +384,24 @@ export function ContentEditor({ lang, initialContent }: { lang: "bn" | "en"; ini
       { value: "completed" as GovernmentProjectStatus, label: isBangla ? "সমাপ্ত" : "Completed" },
       { value: "on_hold" as GovernmentProjectStatus, label: isBangla ? "স্থগিত" : "On Hold" }
     ],
+    [isBangla]
+  );
+
+  const noticeScopeOptions = useMemo(
+    () =>
+      [
+        { value: "home" as NoticeDisplayScope, label: isBangla ? "শুধু হোমপেজ" : "Home page only" },
+        { value: "all_pages" as NoticeDisplayScope, label: isBangla ? "সব পেজ" : "All pages" }
+      ],
+    [isBangla]
+  );
+
+  const noticeDirectionOptions = useMemo(
+    () =>
+      [
+        { value: "rtl" as NoticeScrollDirection, label: isBangla ? "ডান থেকে বাম" : "Right to left" },
+        { value: "ltr" as NoticeScrollDirection, label: isBangla ? "বাম থেকে ডান" : "Left to right" }
+      ],
     [isBangla]
   );
 
@@ -323,16 +436,38 @@ export function ContentEditor({ lang, initialContent }: { lang: "bn" | "en"; ini
     }
   }
 
+  function resetDraft() {
+    setStatus("");
+    setDraft(initialContent);
+  }
+
   return (
     <section className="card-surface p-6">
       <h2 className="text-xl font-bold text-brand-green">{labels.contentManager}</h2>
       <p className="mt-1 text-sm text-brand-ink/70">{labels.helper}</p>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <span
+          className={`rounded-full border px-3 py-1 text-xs font-semibold ${
+            hasChanges
+              ? "border-amber-300 bg-amber-50 text-amber-700"
+              : "border-emerald-300 bg-emerald-50 text-emerald-700"
+          }`}
+        >
+          {hasChanges ? (isBangla ? "সংরক্ষণ না করা পরিবর্তন আছে" : "Unsaved changes") : isBangla ? "সবকিছু সংরক্ষিত" : "All changes saved"}
+        </span>
+      </div>
 
       <div className="mt-4">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-ink/60">{labels.quickNav}</p>
         <div className="mt-2 flex snap-x gap-2 overflow-x-auto pb-1">
           <button type="button" onClick={() => setActiveSection("profile")} className={`shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${activeSection === "profile" ? "border-brand-green bg-brand-green text-white" : "border-brand-ink/15 bg-white text-brand-ink hover:border-brand-green/35 hover:text-brand-green"}`}>
             {labels.navProfile}
+          </button>
+          <button type="button" onClick={() => setActiveSection("notice")} className={`shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${activeSection === "notice" ? "border-brand-green bg-brand-green text-white" : "border-brand-ink/15 bg-white text-brand-ink hover:border-brand-green/35 hover:text-brand-green"}`}>
+            {labels.navNotice}
+          </button>
+          <button type="button" onClick={() => setActiveSection("pages")} className={`shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${activeSection === "pages" ? "border-brand-green bg-brand-green text-white" : "border-brand-ink/15 bg-white text-brand-ink hover:border-brand-green/35 hover:text-brand-green"}`}>
+            {labels.navPages}
           </button>
           <button type="button" onClick={() => setActiveSection("profileDetails")} className={`shrink-0 rounded-full border px-3 py-1.5 text-xs font-semibold transition ${activeSection === "profileDetails" ? "border-brand-green bg-brand-green text-white" : "border-brand-ink/15 bg-white text-brand-ink hover:border-brand-green/35 hover:text-brand-green"}`}>
             {labels.navProfileDetails}
@@ -391,8 +526,306 @@ export function ContentEditor({ lang, initialContent }: { lang: "bn" | "en"; ini
           </div>
         </div>
 
+        <div className={`${activeSection === "notice" ? "block" : "hidden"} rounded-2xl border border-brand-ink/10 bg-white p-4 md:p-5 space-y-4`}>
+          <h3 className="text-lg font-semibold text-brand-green">{isBangla ? "চলমান নোটিশ বার" : "Scrolling Notice Bar"}</h3>
+          <p className="text-sm text-brand-ink/72">
+            {isBangla
+              ? "হেডারের নিচে টিভি নিউজের মতো অনুভূমিকভাবে চলমান নোটিশ এখানে নিয়ন্ত্রণ করুন।"
+              : "Control the horizontal moving ticker shown below the header (TV news style)."}
+          </p>
+
+          <div className="grid gap-3 md:grid-cols-2">
+            <label className="flex items-center gap-2 rounded-xl border border-brand-ink/15 bg-brand-surface/50 px-3 py-2 text-sm">
+              <input
+                type="checkbox"
+                checked={draft.noticeBar.enabled}
+                onChange={(event) => mutate((n) => (n.noticeBar.enabled = event.target.checked))}
+              />
+              <span>{isBangla ? "নোটিশ বার চালু" : "Enable notice bar"}</span>
+            </label>
+            <FieldInput
+              label={isBangla ? "স্ক্রল স্পিড (18-120)" : "Scroll Speed (18-120)"}
+              type="number"
+              value={String(draft.noticeBar.speed)}
+              onChange={(value) => mutate((n) => (n.noticeBar.speed = toSafeNumber(value, 42)))}
+            />
+            <label className="space-y-1">
+              <span className="text-xs font-semibold text-brand-ink/70">{isBangla ? "কোথায় দেখাবে" : "Show on"}</span>
+              <select
+                value={draft.noticeBar.showOn}
+                onChange={(event) => mutate((n) => (n.noticeBar.showOn = event.target.value as NoticeDisplayScope))}
+                className="w-full rounded-xl border border-brand-ink/20 bg-white px-3 py-2 text-sm outline-none focus:border-brand-green"
+              >
+                {noticeScopeOptions.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="space-y-1">
+              <span className="text-xs font-semibold text-brand-ink/70">{isBangla ? "মুভমেন্ট দিক" : "Movement Direction"}</span>
+              <select
+                value={draft.noticeBar.direction}
+                onChange={(event) => mutate((n) => (n.noticeBar.direction = event.target.value as NoticeScrollDirection))}
+                className="w-full rounded-xl border border-brand-ink/20 bg-white px-3 py-2 text-sm outline-none focus:border-brand-green"
+              >
+                {noticeDirectionOptions.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <BilingualField
+            label={isBangla ? "লেবেল (যেমন: নোটিশ)" : "Badge Label (e.g., Notice)"}
+            value={draft.noticeBar.prefixLabel}
+            langLabelBn={labels.bn}
+            langLabelEn={labels.en}
+            onChange={(value) => mutate((n) => (n.noticeBar.prefixLabel = value))}
+          />
+
+          <div className="space-y-4">
+            {draft.noticeBar.items.map((item, index) => (
+              <article key={item.id} className="rounded-2xl border border-brand-ink/10 p-4 space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-sm font-semibold">
+                    {isBangla ? `নোটিশ #${index + 1}` : `Notice #${index + 1}`}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      className="rounded-full border border-brand-ink/20 px-3 py-1 text-xs"
+                      disabled={index === 0}
+                      onClick={() =>
+                        mutate((n) => {
+                          const list = n.noticeBar.items;
+                          [list[index - 1], list[index]] = [list[index], list[index - 1]];
+                          n.noticeBar.items = list.map((entry, entryIndex) => ({ ...entry, order: entryIndex + 1 }));
+                        })
+                      }
+                    >
+                      {isBangla ? "উপরে" : "Up"}
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-full border border-brand-ink/20 px-3 py-1 text-xs"
+                      disabled={index >= draft.noticeBar.items.length - 1}
+                      onClick={() =>
+                        mutate((n) => {
+                          const list = n.noticeBar.items;
+                          [list[index], list[index + 1]] = [list[index + 1], list[index]];
+                          n.noticeBar.items = list.map((entry, entryIndex) => ({ ...entry, order: entryIndex + 1 }));
+                        })
+                      }
+                    >
+                      {isBangla ? "নিচে" : "Down"}
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-full border border-brand-red px-3 py-1 text-xs text-brand-red"
+                      onClick={() =>
+                        mutate((n) => {
+                          n.noticeBar.items.splice(index, 1);
+                          n.noticeBar.items = n.noticeBar.items.map((entry, entryIndex) => ({ ...entry, order: entryIndex + 1 }));
+                        })
+                      }
+                    >
+                      {labels.removeItem}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 md:grid-cols-2">
+                  <FieldInput
+                    label={isBangla ? "লিংক (ঐচ্ছিক)" : "Link (optional)"}
+                    value={item.link}
+                    onChange={(value) => mutate((n) => (n.noticeBar.items[index].link = value))}
+                  />
+                  <FieldInput
+                    label={isBangla ? "অর্ডার" : "Order"}
+                    type="number"
+                    value={String(item.order)}
+                    onChange={(value) => mutate((n) => (n.noticeBar.items[index].order = toSafeNumber(value, index + 1)))}
+                  />
+                  <FieldInput
+                    label={isBangla ? "শুরুর সময় (ঐচ্ছিক)" : "Start At (optional)"}
+                    type="datetime-local"
+                    value={item.startAt}
+                    onChange={(value) => mutate((n) => (n.noticeBar.items[index].startAt = value))}
+                  />
+                  <FieldInput
+                    label={isBangla ? "শেষ সময় (ঐচ্ছিক)" : "End At (optional)"}
+                    type="datetime-local"
+                    value={item.endAt}
+                    onChange={(value) => mutate((n) => (n.noticeBar.items[index].endAt = value))}
+                  />
+                </div>
+
+                <div className="grid gap-3 md:grid-cols-2">
+                  <label className="flex items-center gap-2 rounded-xl border border-brand-ink/15 bg-brand-surface/50 px-3 py-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={item.isActive}
+                      onChange={(event) => mutate((n) => (n.noticeBar.items[index].isActive = event.target.checked))}
+                    />
+                    <span>{isBangla ? "সক্রিয় নোটিশ" : "Active notice"}</span>
+                  </label>
+                  <label className="flex items-center gap-2 rounded-xl border border-brand-ink/15 bg-brand-surface/50 px-3 py-2 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={item.isUrgent}
+                      onChange={(event) => mutate((n) => (n.noticeBar.items[index].isUrgent = event.target.checked))}
+                    />
+                    <span>{isBangla ? "জরুরি নোটিশ" : "Urgent notice"}</span>
+                  </label>
+                </div>
+
+                <BilingualField
+                  label={isBangla ? "নোটিশ টেক্সট" : "Notice Text"}
+                  value={item.text}
+                  langLabelBn={labels.bn}
+                  langLabelEn={labels.en}
+                  onChange={(value) => mutate((n) => (n.noticeBar.items[index].text = value))}
+                />
+              </article>
+            ))}
+          </div>
+
+          <button
+            className="rounded-full bg-brand-green px-4 py-2 text-xs font-semibold text-white"
+            onClick={() =>
+              mutate((n) =>
+                n.noticeBar.items.push({
+                  id: createId("notice"),
+                  text: { bn: "", en: "" },
+                  link: "",
+                  isUrgent: false,
+                  isActive: true,
+                  startAt: "",
+                  endAt: "",
+                  order: n.noticeBar.items.length + 1
+                })
+              )
+            }
+          >
+            {labels.addItem}
+          </button>
+        </div>
+
+        <div className={`${activeSection === "pages" ? "block" : "hidden"} rounded-2xl border border-brand-ink/10 bg-white p-4 md:p-5 space-y-5`}>
+          <h3 className="text-lg font-semibold text-brand-green">{isBangla ? "পাবলিক পেজ কপি" : "Public Page Copy"}</h3>
+          <p className="text-sm text-brand-ink/72">
+            {isBangla
+              ? "ওয়েবসাইটের পেজভিত্তিক টেক্সট এখানে নিয়ন্ত্রণ করুন।"
+              : "Manage page-specific public text from here."}
+          </p>
+
+          <details className="rounded-xl border border-brand-ink/10 p-3" open>
+            <summary className="cursor-pointer text-sm font-semibold text-brand-green">
+              {isBangla ? "হোমপেজ কপি" : "Home Page Copy"}
+            </summary>
+            <div className="mt-4 space-y-4">
+              <BilingualField label="Hero Tag" value={draft.pageCopy.home.heroTag} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.heroTag = value))} />
+              <div className="grid gap-4 md:grid-cols-2">
+                <BilingualField label={isBangla ? "অঙ্গীকার কাউন্টার" : "Commitments Counter"} value={draft.pageCopy.home.commitmentsLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.commitmentsLabel = value))} />
+                <BilingualField label={isBangla ? "চলমান প্রকল্প কাউন্টার" : "Running Projects Counter"} value={draft.pageCopy.home.runningProjectsLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.runningProjectsLabel = value))} />
+                <BilingualField label={isBangla ? "রিপোর্ট কাউন্টার" : "Reports Counter"} value={draft.pageCopy.home.reportsLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.reportsLabel = value))} />
+                <BilingualField label={isBangla ? "মাসিক প্রতিবেদন শিরোনাম" : "Monthly Reports Title"} value={draft.pageCopy.home.monthlyReportsTitle} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.monthlyReportsTitle = value))} />
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <BilingualField label={isBangla ? "সরাসরি সেবা ট্যাগ" : "Direct Service Tag"} value={draft.pageCopy.home.directServiceTag} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.directServiceTag = value))} />
+                <BilingualField label={isBangla ? "স্ট্যাটাস ট্যাগ" : "Status Tag"} value={draft.pageCopy.home.statusTag} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.statusTag = value))} />
+                <BilingualField label={isBangla ? "স্বচ্ছতা ট্যাগ" : "Transparency Tag"} value={draft.pageCopy.home.transparencyTag} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.transparencyTag = value))} />
+                <BilingualField label={isBangla ? "প্রকাশিত লেবেল" : "Published Label"} value={draft.pageCopy.home.publishedLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.publishedLabel = value))} />
+              </div>
+              <BilingualField label={isBangla ? "সরাসরি সেবা শিরোনাম" : "Direct Service Title"} value={draft.pageCopy.home.directServiceTitle} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.directServiceTitle = value))} />
+              <BilingualField label={isBangla ? "সরাসরি সেবা লেখা" : "Direct Service Text"} value={draft.pageCopy.home.directServiceText} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.home.directServiceText = value))} />
+              <BilingualField label={isBangla ? "স্ট্যাটাস শিরোনাম" : "Status Title"} value={draft.pageCopy.home.statusTitle} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.statusTitle = value))} />
+              <BilingualField label={isBangla ? "স্ট্যাটাস লেখা" : "Status Text"} value={draft.pageCopy.home.statusText} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.home.statusText = value))} />
+              <BilingualField label={isBangla ? "স্বচ্ছতা শিরোনাম" : "Transparency Title"} value={draft.pageCopy.home.transparencyTitle} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.transparencyTitle = value))} />
+              <BilingualField label={isBangla ? "স্বচ্ছতা লেখা" : "Transparency Text"} value={draft.pageCopy.home.transparencyText} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.home.transparencyText = value))} />
+              <BilingualField label={isBangla ? "প্রকল্প বর্ণনা" : "Projects Description"} value={draft.pageCopy.home.projectsDescription} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.home.projectsDescription = value))} />
+              <BilingualField label={isBangla ? "মিডিয়া বর্ণনা" : "Media Description"} value={draft.pageCopy.home.mediaDescription} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.home.mediaDescription = value))} />
+              <BilingualField label={isBangla ? "কল টু অ্যাকশন শিরোনাম" : "CTA Title"} value={draft.pageCopy.home.ctaTitle} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.ctaTitle = value))} />
+              <BilingualField label={isBangla ? "কল টু অ্যাকশন লেখা" : "CTA Text"} value={draft.pageCopy.home.ctaText} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.home.ctaText = value))} />
+              <div className="grid gap-4 md:grid-cols-2">
+                <BilingualField label={isBangla ? "বাজেট লেবেল" : "Budget Label"} value={draft.pageCopy.home.budgetLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.budgetLabel = value))} />
+                <BilingualField label={isBangla ? "ব্যয় লেবেল" : "Spent Label"} value={draft.pageCopy.home.spentLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.spentLabel = value))} />
+              </div>
+              <BilingualField label={isBangla ? "ইশতেহার ট্যাগ" : "Manifesto Tag"} value={draft.pageCopy.home.manifestoTag} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.home.manifestoTag = value))} />
+              <BilingualField label={isBangla ? "ইশতেহার লেখা" : "Manifesto Text"} value={draft.pageCopy.home.manifestoText} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={4} onChange={(value) => mutate((n) => (n.pageCopy.home.manifestoText = value))} />
+            </div>
+          </details>
+
+          <details className="rounded-xl border border-brand-ink/10 p-3">
+            <summary className="cursor-pointer text-sm font-semibold text-brand-green">
+              {isBangla ? "প্রোফাইল / কাজ / যোগাযোগ পেজ" : "Profile / Work / Contact Pages"}
+            </summary>
+            <div className="mt-4 space-y-4">
+              <BilingualField label={isBangla ? "প্রোফাইল: জীবনী লেবেল" : "Profile: Brief Bio Label"} value={draft.pageCopy.profile.briefBioLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.profile.briefBioLabel = value))} />
+              <BilingualField label={isBangla ? "প্রোফাইল: কার্যক্রম লেবেল" : "Profile: Activities Label"} value={draft.pageCopy.profile.activitiesLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.profile.activitiesLabel = value))} />
+              <BilingualField label={isBangla ? "কাজের পেজ: বিবরণ" : "Work Page: Description"} value={draft.pageCopy.workHistory.pageDescription} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.workHistory.pageDescription = value))} />
+              <BilingualField label={isBangla ? "কাজের পেজ: CTA শিরোনাম" : "Work Page: CTA Title"} value={draft.pageCopy.workHistory.ctaTitle} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.workHistory.ctaTitle = value))} />
+              <BilingualField label={isBangla ? "কাজের পেজ: CTA লেখা" : "Work Page: CTA Text"} value={draft.pageCopy.workHistory.ctaText} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.workHistory.ctaText = value))} />
+              <BilingualField label={isBangla ? "কাজের পেজ: ব্যাকগ্রাউন্ড ছবির Alt" : "Work Page: Hero Image Alt"} value={draft.pageCopy.workHistory.heroImageAlt} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.workHistory.heroImageAlt = value))} />
+              <div className="grid gap-4 md:grid-cols-2">
+                <BilingualField label={isBangla ? "যোগাযোগ: ইমেইল লেবেল" : "Contact: Email Label"} value={draft.pageCopy.contact.emailLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.contact.emailLabel = value))} />
+                <BilingualField label={isBangla ? "যোগাযোগ: ফেসবুক ইনবক্স" : "Contact: Facebook Inbox Label"} value={draft.pageCopy.contact.facebookInboxLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.contact.facebookInboxLabel = value))} />
+              </div>
+            </div>
+          </details>
+
+          <details className="rounded-xl border border-brand-ink/10 p-3">
+            <summary className="cursor-pointer text-sm font-semibold text-brand-green">
+              {isBangla ? "উন্নয়ন + সরকারি প্রকল্প পেজ" : "Development + Government Project Pages"}
+            </summary>
+            <div className="mt-4 space-y-4">
+              <BilingualField label={isBangla ? "উন্নয়ন পেজ: মূল বিবরণ" : "Development Page: Description"} value={draft.pageCopy.development.pageDescription} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.development.pageDescription = value))} />
+              <div className="grid gap-4 md:grid-cols-2">
+                <BilingualField label={isBangla ? "উন্নয়ন: মাসিক প্রতিবেদন নেভিগেশন" : "Development: Monthly Reports Nav"} value={draft.pageCopy.development.monthlyReportsNavLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.development.monthlyReportsNavLabel = value))} />
+                <BilingualField label={isBangla ? "উন্নয়ন: View All লেবেল" : "Development: View All Label"} value={draft.pageCopy.development.viewAllLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.development.viewAllLabel = value))} />
+                <BilingualField label={isBangla ? "উন্নয়ন: বাজেট লেবেল" : "Development: Budget Label"} value={draft.pageCopy.development.budgetLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.development.budgetLabel = value))} />
+                <BilingualField label={isBangla ? "উন্নয়ন: ব্যয় লেবেল" : "Development: Spent Label"} value={draft.pageCopy.development.spentLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.development.spentLabel = value))} />
+                <BilingualField label={isBangla ? "উন্নয়ন: অগ্রগতি লেবেল" : "Development: Progress Label"} value={draft.pageCopy.development.progressLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.development.progressLabel = value))} />
+                <BilingualField label={isBangla ? "উন্নয়ন: মাসিক প্রতিবেদন শিরোনাম" : "Development: Monthly Reports Title"} value={draft.pageCopy.development.monthlyReportsTitle} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.development.monthlyReportsTitle = value))} />
+              </div>
+              <BilingualField label={isBangla ? "উন্নয়ন: মাসিক প্রতিবেদন বিবরণ" : "Development: Monthly Reports Description"} value={draft.pageCopy.development.monthlyReportsDescription} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.development.monthlyReportsDescription = value))} />
+
+              <BilingualField label={isBangla ? "সরকারি প্রকল্প: পেজ শিরোনাম" : "Gov Projects: Page Title"} value={draft.pageCopy.governmentProjects.pageTitle} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.pageTitle = value))} />
+              <BilingualField label={isBangla ? "সরকারি প্রকল্প: পেজ বিবরণ" : "Gov Projects: Page Description"} value={draft.pageCopy.governmentProjects.pageDescription} langLabelBn={labels.bn} langLabelEn={labels.en} multiline rows={3} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.pageDescription = value))} />
+              <div className="grid gap-4 md:grid-cols-2">
+                <BilingualField label={isBangla ? "সরকারি প্রকল্প: বাজেট লেবেল" : "Gov Projects: Budget Label"} value={draft.pageCopy.governmentProjects.totalBudgetLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.totalBudgetLabel = value))} />
+                <BilingualField label={isBangla ? "সরকারি প্রকল্প: ব্যয় লেবেল" : "Gov Projects: Spent Label"} value={draft.pageCopy.governmentProjects.spentLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.spentLabel = value))} />
+                <BilingualField label={isBangla ? "সরকারি প্রকল্প: অগ্রগতি লেবেল" : "Gov Projects: Progress Label"} value={draft.pageCopy.governmentProjects.progressLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.progressLabel = value))} />
+                <BilingualField label={isBangla ? "সরকারি প্রকল্প: বিস্তারিত বাটন" : "Gov Projects: Full Breakdown Label"} value={draft.pageCopy.governmentProjects.fullBreakdownLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.fullBreakdownLabel = value))} />
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <BilingualField label={isBangla ? "স্ট্যাটাস: পরিকল্পিত" : "Status: Planned"} value={draft.pageCopy.governmentProjects.statusLabels.planned} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.statusLabels.planned = value))} />
+                <BilingualField label={isBangla ? "স্ট্যাটাস: চলমান" : "Status: Running"} value={draft.pageCopy.governmentProjects.statusLabels.running} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.statusLabels.running = value))} />
+                <BilingualField label={isBangla ? "স্ট্যাটাস: সমাপ্ত" : "Status: Completed"} value={draft.pageCopy.governmentProjects.statusLabels.completed} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.statusLabels.completed = value))} />
+                <BilingualField label={isBangla ? "স্ট্যাটাস: স্থগিত" : "Status: On Hold"} value={draft.pageCopy.governmentProjects.statusLabels.onHold} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjects.statusLabels.onHold = value))} />
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: ব্যাক লেবেল" : "Detail Page: Back Label"} value={draft.pageCopy.governmentProjectDetails.backToListLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.backToListLabel = value))} />
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: সেক্টর" : "Detail Page: Sector"} value={draft.pageCopy.governmentProjectDetails.sectorLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.sectorLabel = value))} />
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: অবস্থান" : "Detail Page: Location"} value={draft.pageCopy.governmentProjectDetails.locationLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.locationLabel = value))} />
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: বাস্তবায়নকারী" : "Detail Page: Implementing Agency"} value={draft.pageCopy.governmentProjectDetails.implementingAgencyLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.implementingAgencyLabel = value))} />
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: বাজেট" : "Detail Page: Budget"} value={draft.pageCopy.governmentProjectDetails.totalBudgetLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.totalBudgetLabel = value))} />
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: ব্যয়" : "Detail Page: Spent"} value={draft.pageCopy.governmentProjectDetails.spentLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.spentLabel = value))} />
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: অগ্রগতি" : "Detail Page: Progress"} value={draft.pageCopy.governmentProjectDetails.progressLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.progressLabel = value))} />
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: ধাপ" : "Detail Page: Phase"} value={draft.pageCopy.governmentProjectDetails.phaseLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.phaseLabel = value))} />
+                <BilingualField label={isBangla ? "ডিটেইল পেজ: উপকারভোগী" : "Detail Page: Beneficiaries"} value={draft.pageCopy.governmentProjectDetails.beneficiariesLabel} langLabelBn={labels.bn} langLabelEn={labels.en} onChange={(value) => mutate((n) => (n.pageCopy.governmentProjectDetails.beneficiariesLabel = value))} />
+              </div>
+            </div>
+          </details>
+        </div>
+
         <div className={`${activeSection === "profileDetails" ? "block" : "hidden"} rounded-2xl border border-brand-ink/10 bg-white p-4 md:p-5 space-y-4`}>
-          <h3 className="text-lg font-semibold text-brand-green">{isBangla ? "পরিচিতি সেকশনের লেখা ও বই" : "Profile Section Text and Books"}</h3>
+          <h3 className="text-lg font-semibold text-brand-green">{isBangla ? "পরিচিতি সেকশনের লেখা" : "Profile Section Text"}</h3>
           <BilingualField
             label={isBangla ? "জীবনী শিরোনাম" : "Biography Title"}
             value={draft.profileSection.biographyTitle}
@@ -416,29 +849,15 @@ export function ContentEditor({ lang, initialContent }: { lang: "bn" | "en"; ini
             langLabelEn={labels.en}
             onChange={(value) => mutate((n) => (n.profileSection.activitiesTitle = value))}
           />
-          <BilingualField
-            label={isBangla ? "বই সেকশন শিরোনাম" : "Books Section Title"}
-            value={draft.profileSection.booksTitle}
-            langLabelBn={labels.bn}
-            langLabelEn={labels.en}
-            onChange={(value) => mutate((n) => (n.profileSection.booksTitle = value))}
-          />
-          <BilingualField
-            label={isBangla ? "বই সংগ্রহ/ক্রয় শিরোনাম" : "Book Collection Title"}
-            value={draft.profileSection.collectionTitle}
-            langLabelBn={labels.bn}
-            langLabelEn={labels.en}
-            onChange={(value) => mutate((n) => (n.profileSection.collectionTitle = value))}
-          />
           <div className="grid gap-3 md:grid-cols-2">
             <FieldTextArea
-              label={isBangla ? "সংগ্রহের পয়েন্ট (বাংলা, প্রতিটি লাইন আলাদা)" : "Collection Points (Bangla, one line each)"}
+              label={isBangla ? "জনসম্পৃক্ততার হাইলাইট (বাংলা, প্রতিটি লাইন আলাদা)" : "Public Engagement Highlights (Bangla, one line each)"}
               value={draft.profileSection.collectionPoints.bn.join("\n")}
               rows={4}
               onChange={(value) => mutate((n) => (n.profileSection.collectionPoints.bn = parseLineList(value)))}
             />
             <FieldTextArea
-              label={isBangla ? "সংগ্রহের পয়েন্ট (English, one line each)" : "Collection Points (English, one line each)"}
+              label={isBangla ? "জনসম্পৃক্ততার হাইলাইট (English, one line each)" : "Public Engagement Highlights (English, one line each)"}
               value={draft.profileSection.collectionPoints.en.join("\n")}
               rows={4}
               onChange={(value) => mutate((n) => (n.profileSection.collectionPoints.en = parseLineList(value)))}
@@ -460,59 +879,6 @@ export function ContentEditor({ lang, initialContent }: { lang: "bn" | "en"; ini
               onChange={(value) => mutate((n) => (n.profileSection.facebookButtonLabel = value))}
             />
           </div>
-          <div className="rounded-xl border border-brand-ink/10 bg-slate-50 px-3 py-2 text-sm font-semibold text-brand-green">
-            {isBangla ? "বই তালিকা" : "Book Cards"}
-          </div>
-          {draft.profileSection.books.map((book, index) => (
-            <div key={book.id} className="rounded-2xl border border-brand-ink/10 p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold">{isBangla ? `বই #${index + 1}` : `Book #${index + 1}`}</p>
-                <button type="button" className="rounded-full border border-brand-red px-3 py-1 text-xs text-brand-red" onClick={() => mutate((n) => void n.profileSection.books.splice(index, 1))}>
-                  {labels.removeItem}
-                </button>
-              </div>
-              <UploadUrlField
-                label={isBangla ? "কভার ইমেজ URL" : "Cover Image URL"}
-                value={book.cover}
-                onChange={(value) => mutate((n) => (n.profileSection.books[index].cover = value))}
-                accept="image/*"
-                uploadKind="image"
-                isBangla={isBangla}
-              />
-              <BilingualField
-                label={isBangla ? "বইয়ের নাম" : "Book Title"}
-                value={book.title}
-                langLabelBn={labels.bn}
-                langLabelEn={labels.en}
-                onChange={(value) => mutate((n) => (n.profileSection.books[index].title = value))}
-              />
-              <BilingualField
-                label={isBangla ? "সংক্ষিপ্ত বিবরণ" : "Summary"}
-                value={book.summary}
-                langLabelBn={labels.bn}
-                langLabelEn={labels.en}
-                multiline
-                rows={3}
-                onChange={(value) => mutate((n) => (n.profileSection.books[index].summary = value))}
-              />
-            </div>
-          ))}
-          <button
-            type="button"
-            className="rounded-full bg-brand-green px-4 py-2 text-xs font-semibold text-white"
-            onClick={() =>
-              mutate((n) =>
-                n.profileSection.books.push({
-                  id: createId("pb"),
-                  cover: "",
-                  title: { bn: "", en: "" },
-                  summary: { bn: "", en: "" }
-                })
-              )
-            }
-          >
-            {labels.addItem}
-          </button>
         </div>
 
         <div className={`${activeSection === "cta" ? "block" : "hidden"} rounded-2xl border border-brand-ink/10 bg-white p-4 md:p-5 space-y-4`}>
@@ -908,7 +1274,15 @@ export function ContentEditor({ lang, initialContent }: { lang: "bn" | "en"; ini
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <button disabled={saving} onClick={save} className="rounded-full bg-brand-green px-5 py-2 text-sm font-bold text-white disabled:opacity-70">{saving ? labels.saving : labels.save}</button>
+        <button disabled={saving || !hasChanges} onClick={save} className="rounded-full bg-brand-green px-5 py-2 text-sm font-bold text-white disabled:opacity-70">{saving ? labels.saving : labels.save}</button>
+        <button
+          type="button"
+          disabled={saving || !hasChanges}
+          onClick={resetDraft}
+          className="rounded-full border border-brand-ink/30 px-5 py-2 text-sm font-bold text-brand-ink disabled:opacity-60"
+        >
+          {isBangla ? "রিসেট" : "Reset"}
+        </button>
         {status ? <p className="text-sm text-brand-ink/80">{status}</p> : null}
       </div>
     </section>

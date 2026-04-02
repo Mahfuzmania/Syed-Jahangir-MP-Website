@@ -22,23 +22,16 @@ export default async function DevelopmentProjectsPage({ params }: { params: Prom
     notFound();
   }
 
-  const isBangla = lang === "bn";
   const copy = t(lang);
   const content = await getSiteContent();
+  const pageCopy = content.pageCopy.development;
   const featuredCommitments = content.commitments.slice(0, 3);
   const featuredProjects = content.governmentProjects.slice(0, 3);
   const featuredWork = content.workHistory.slice(0, 4);
 
   return (
     <div className="space-y-8">
-      <SectionTitle
-        title={copy.developmentProjects}
-        description={
-          isBangla
-            ? "অগ্রাধিকারভিত্তিক পরিকল্পনা, সরকারি প্রকল্প, পূর্বের কাজ এবং মাসিক প্রতিবেদন একসাথে দেখুন।"
-            : "Explore priority plans, government projects, work history, and monthly reports in one place."
-        }
-      />
+      <SectionTitle title={copy.developmentProjects} description={translate(lang, pageCopy.pageDescription)} />
 
       <SubsectionNav
         defaultActiveId="priority-plans"
@@ -46,7 +39,7 @@ export default async function DevelopmentProjectsPage({ params }: { params: Prom
           { id: "priority-plans", label: copy.commitments },
           { id: "government-projects", label: copy.governmentProjects },
           { id: "previous-work", label: copy.work },
-          { id: "monthly-reports", label: isBangla ? "মাসিক প্রতিবেদন" : "Monthly Reports" }
+          { id: "monthly-reports", label: translate(lang, pageCopy.monthlyReportsNavLabel) }
         ]}
       />
 
@@ -54,7 +47,7 @@ export default async function DevelopmentProjectsPage({ params }: { params: Prom
         <div className="flex flex-wrap items-end justify-between gap-3">
           <h2 className="text-2xl font-bold text-brand-ink">{copy.commitments}</h2>
           <Link href={`/${lang}/commitments`} className="text-sm font-bold text-brand-green hover:underline">
-            {isBangla ? "সব দেখুন" : "View All"}
+            {translate(lang, pageCopy.viewAllLabel)}
           </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -77,7 +70,7 @@ export default async function DevelopmentProjectsPage({ params }: { params: Prom
         <div className="flex flex-wrap items-end justify-between gap-3">
           <h2 className="text-2xl font-bold text-brand-ink">{copy.governmentProjects}</h2>
           <Link href={`/${lang}/government-projects`} className="text-sm font-bold text-brand-green hover:underline">
-            {isBangla ? "সব দেখুন" : "View All"}
+            {translate(lang, pageCopy.viewAllLabel)}
           </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -90,9 +83,9 @@ export default async function DevelopmentProjectsPage({ params }: { params: Prom
                 <h3 className="text-lg font-bold text-brand-green">{translate(lang, project.title)}</h3>
                 <p className="mt-2 text-sm text-brand-ink/78">{translate(lang, project.summary)}</p>
                 <div className="mt-3 rounded-xl border border-brand-ink/10 bg-slate-50 p-2.5 text-xs text-brand-ink/75">
-                  <p>{isBangla ? "মোট বাজেট" : "Total Budget"}: {formatBdt(project.budgetTotal, lang)}</p>
-                  <p>{isBangla ? "ব্যয়" : "Spent"}: {formatBdt(project.spentAmount, lang)}</p>
-                  <p>{isBangla ? "অগ্রগতি" : "Progress"}: {project.progressPercent}%</p>
+                  <p>{translate(lang, pageCopy.budgetLabel)}: {formatBdt(project.budgetTotal, lang)}</p>
+                  <p>{translate(lang, pageCopy.spentLabel)}: {formatBdt(project.spentAmount, lang)}</p>
+                  <p>{translate(lang, pageCopy.progressLabel)}: {project.progressPercent}%</p>
                 </div>
                 <Link href={`/${lang}/government-projects/${project.slug}`} className="mt-3 inline-flex text-sm font-bold text-brand-red hover:underline">
                   {copy.readMore}
@@ -107,7 +100,7 @@ export default async function DevelopmentProjectsPage({ params }: { params: Prom
         <div className="flex flex-wrap items-end justify-between gap-3">
           <h2 className="text-2xl font-bold text-brand-ink">{copy.work}</h2>
           <Link href={`/${lang}/work-history`} className="text-sm font-bold text-brand-green hover:underline">
-            {isBangla ? "সব দেখুন" : "View All"}
+            {translate(lang, pageCopy.viewAllLabel)}
           </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
@@ -125,15 +118,12 @@ export default async function DevelopmentProjectsPage({ params }: { params: Prom
 
       <section id="monthly-reports" className="space-y-4 scroll-mt-28">
         <SectionTitle
-          title={isBangla ? "মাসিক প্রতিবেদন" : "Monthly Reports"}
-          description={
-            isBangla
-              ? "জনসেবা, প্রকল্প তদারকি ও অগ্রগতির মাসভিত্তিক সারসংক্ষেপ।"
-              : "Month-wise progress summaries for citizen services and project supervision."
-          }
+          title={translate(lang, pageCopy.monthlyReportsTitle)}
+          description={translate(lang, pageCopy.monthlyReportsDescription)}
         />
         <MonthlyReportFeed lang={lang} reports={content.monthlyReports} />
       </section>
     </div>
   );
 }
+

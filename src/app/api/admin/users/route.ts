@@ -78,6 +78,7 @@ export async function PATCH(request: NextRequest) {
     const body = (await request.json()) as {
       userId?: string;
       name?: string;
+      email?: string;
       role?: UserRole;
       isActive?: boolean;
       newPassword?: string;
@@ -98,6 +99,7 @@ export async function PATCH(request: NextRequest) {
     const nextRole = body.role ?? target.role;
     const nextActive = typeof body.isActive === "boolean" ? body.isActive : target.isActive;
     const nextName = typeof body.name === "string" ? body.name.trim() : target.name;
+    const nextEmail = typeof body.email === "string" ? body.email.trim().toLowerCase() : target.email;
     const nextPassword = typeof body.newPassword === "string" ? body.newPassword.trim() : "";
 
     if (nextRole !== "admin" && nextRole !== "editor") {
@@ -105,6 +107,12 @@ export async function PATCH(request: NextRequest) {
     }
     if (!nextName) {
       return NextResponse.json({ error: "Name is required" }, { status: 400 });
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(nextEmail)) {
+      return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
+    }
+    if (users.some((entry) => entry.id !== userId && entry.email.toLowerCase() === nextEmail)) {
+      return NextResponse.json({ error: "Email is already in use" }, { status: 400 });
     }
     if (nextPassword && nextPassword.length < 8) {
       return NextResponse.json({ error: "Password must be at least 8 characters" }, { status: 400 });
@@ -124,6 +132,7 @@ export async function PATCH(request: NextRequest) {
     users[index] = {
       ...target,
       name: nextName,
+      email: nextEmail,
       role: nextRole,
       isActive: nextActive,
       passwordHash: nextPassword ? hashPassword(nextPassword) : target.passwordHash

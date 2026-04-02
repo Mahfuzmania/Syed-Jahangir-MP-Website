@@ -13,10 +13,15 @@ export default async function CommitmentsPage({ params }: { params: Promise<{ la
 
   const text = t(lang);
   const content = await getSiteContent();
+  const commitmentCount = content.commitments.length;
+  const description =
+    lang === "bn"
+      ? `দিনাজপুর-৩ এর জন্য বাস্তবায়নযোগ্য ${commitmentCount}টি প্রধান অগ্রাধিকার`
+      : `${commitmentCount} practical priorities for Dinajpur-3.`;
 
   return (
     <div className="space-y-6">
-      <SectionTitle title={text.commitments} description={lang === "bn" ? "দিনাজপুর-৩ এর জন্য বাস্তবায়নযোগ্য ছয়টি প্রধান অগ্রাধিকার" : "Six practical priorities for Dinajpur-3."} />
+      <SectionTitle title={text.commitments} description={description} />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {content.commitments.map((item) => (
           <article key={item.id} className="card-surface overflow-hidden">

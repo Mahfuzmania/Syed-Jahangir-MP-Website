@@ -33,6 +33,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const isBangla = lang === "bn";
   const candidateName = translate(lang, content.candidate.name);
   const candidateHonorific = isBangla ? "এমপি" : "MP";
+  const homeCopy = content.pageCopy.home;
 
   const commitmentSlides = content.commitments.map((item) => ({
     id: item.id,
@@ -74,45 +75,6 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     .slice(0, 2);
 
   const runningProjects = content.governmentProjects.filter((entry) => entry.status === "running").length;
-  const labels = {
-    heroTag: isBangla ? "জনসেবা ও উন্নয়ন" : "Public Service and Development",
-    commitments: isBangla ? "অঙ্গীকার" : "Commitments",
-    running: isBangla ? "চলমান প্রকল্প" : "Running Projects",
-    reports: isBangla ? "মাসিক রিপোর্ট" : "Monthly Reports",
-    directService: isBangla ? "সরাসরি সেবা" : "Direct Service",
-    directServiceTitle: isBangla ? "আপনার সমস্যা সরাসরি জানান" : "Submit local issues directly",
-    directServiceText: isBangla
-      ? "প্রতিটি জমা রেফারেন্স আইডিসহ সংরক্ষিত হয় এবং অফিস টিম ফলো-আপ করে।"
-      : "Every submission is logged with a reference ID and followed by the office team.",
-    status: isBangla ? "স্ট্যাটাস ট্র্যাকিং" : "Status Tracking",
-    statusTitle: isBangla ? "রেফারেন্স দিয়ে আবেদন ট্র্যাক করুন" : "Track your request by reference",
-    statusText: isBangla
-      ? "আপনার আবেদন নতুন, পর্যালোচনায়, প্রসেসিং, সমাধান বা বন্ধ - কোন পর্যায়ে আছে দেখুন।"
-      : "See whether your request is new, in review, processing, resolved, or closed.",
-    transparency: isBangla ? "স্বচ্ছতা" : "Transparency",
-    transparencyTitle: isBangla ? "প্রকল্প ও রিপোর্ট সবার জন্য উন্মুক্ত" : "Projects and reports are public",
-    transparencyText: isBangla
-      ? "বাজেট, ব্যয়, অগ্রগতি এবং মাসিক প্রতিবেদন এক জায়গায় দেখুন।"
-      : "Budget, spending, progress, and monthly reports are available in one portal.",
-    projectsDescription: isBangla
-      ? "প্রকল্পভিত্তিক বাজেট, ব্যয় ও অগ্রগতির তথ্য নিয়মিত হালনাগাদ করা হয়।"
-      : "Project-wise budget, spending, and progress data are updated regularly.",
-    monthlyReports: isBangla ? "মাসিক প্রতিবেদন" : "Monthly Reports",
-    published: isBangla ? "প্রকাশিত" : "Published",
-    openPdf: isBangla ? "PDF দেখুন" : "Open PDF",
-    download: isBangla ? "ডাউনলোড" : "Download",
-    mediaDescription: isBangla ? "ভিডিও আপডেট ও গুরুত্বপূর্ণ মিডিয়া কভারেজ" : "Video updates and key media content",
-    ctaTitle: isBangla ? "আপনার এলাকার সমস্যা সরাসরি জানান" : "Report your local issue directly",
-    ctaText: isBangla
-      ? "অভিযোগ, পরামর্শ বা জরুরি জনস্বার্থের বিষয় সরাসরি পাঠান এবং রেফারেন্স দিয়ে ট্র্যাক করুন।"
-      : "Send complaints, suggestions, or urgent public-interest issues directly and track them by reference.",
-    budget: isBangla ? "বাজেট" : "Budget",
-    spent: isBangla ? "ব্যয়" : "Spent",
-    manifestoTag: isBangla ? "নির্বাচনী অঙ্গীকার" : "Election Priorities",
-    manifestoText: isBangla
-      ? "এই ইশতেহারে শিক্ষা, স্বাস্থ্য, কৃষি, কর্মসংস্থান এবং নাগরিক সেবা বাস্তবায়নের ধাপে ধাপে রোডম্যাপ তুলে ধরা হয়েছে।"
-      : "The manifesto presents a practical roadmap for education, healthcare, agriculture, jobs, and citizen service delivery."
-  };
 
   return (
     <div className="space-y-12 pb-8 sm:space-y-14">
@@ -125,7 +87,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           <div className="relative grid gap-6 p-5 sm:p-7 md:p-9 lg:grid-cols-[1.08fr,0.92fr] lg:items-center lg:gap-8 lg:p-12">
             <div className="order-2 lg:order-1">
               <p className="inline-flex rounded-full border border-brand-green/25 bg-white/84 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green/90">
-                {labels.heroTag}
+                {translate(lang, homeCopy.heroTag)}
               </p>
               <h1 className="mt-3 text-balance text-3xl font-extrabold leading-[1.05] text-brand-ink sm:text-[2.3rem] md:text-[2.9rem]">
                 {candidateName}
@@ -157,15 +119,21 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
               <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                 <article className="rounded-xl border border-brand-green/20 bg-white/78 p-2.5">
-                  <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-ink/60">{labels.commitments}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-ink/60">
+                    {translate(lang, homeCopy.commitmentsLabel)}
+                  </p>
                   <p className="mt-1 text-lg font-extrabold text-brand-green">{content.commitments.length}</p>
                 </article>
                 <article className="rounded-xl border border-brand-green/20 bg-white/78 p-2.5">
-                  <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-ink/60">{labels.running}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-ink/60">
+                    {translate(lang, homeCopy.runningProjectsLabel)}
+                  </p>
                   <p className="mt-1 text-lg font-extrabold text-brand-green">{runningProjects}</p>
                 </article>
                 <article className="rounded-xl border border-brand-green/20 bg-white/78 p-2.5">
-                  <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-ink/60">{labels.reports}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-ink/60">
+                    {translate(lang, homeCopy.reportsLabel)}
+                  </p>
                   <p className="mt-1 text-lg font-extrabold text-brand-green">{content.monthlyReports.length}</p>
                 </article>
                 <article className="rounded-xl border border-brand-green/20 bg-white/78 p-2.5">
@@ -187,27 +155,27 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
       <section className="grid gap-3.5 md:grid-cols-3">
         <article className="card-surface p-4 sm:p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green/80">{labels.directService}</p>
-          <h2 className="mt-2 text-lg font-bold text-brand-ink sm:text-xl">{labels.directServiceTitle}</h2>
-          <p className="mt-2 line-clamp-2 text-sm text-brand-ink/75">{labels.directServiceText}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green/80">{translate(lang, homeCopy.directServiceTag)}</p>
+          <h2 className="mt-2 text-lg font-bold text-brand-ink sm:text-xl">{translate(lang, homeCopy.directServiceTitle)}</h2>
+          <p className="mt-2 line-clamp-2 text-sm text-brand-ink/75">{translate(lang, homeCopy.directServiceText)}</p>
           <Link href={`/${lang}/write-to-mp`} className="mt-3 inline-flex text-sm font-bold text-brand-green hover:underline">
             {copy.writeToMp}
           </Link>
         </article>
 
         <article className="card-surface p-4 sm:p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green/80">{labels.status}</p>
-          <h2 className="mt-2 text-lg font-bold text-brand-ink sm:text-xl">{labels.statusTitle}</h2>
-          <p className="mt-2 line-clamp-2 text-sm text-brand-ink/75">{labels.statusText}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green/80">{translate(lang, homeCopy.statusTag)}</p>
+          <h2 className="mt-2 text-lg font-bold text-brand-ink sm:text-xl">{translate(lang, homeCopy.statusTitle)}</h2>
+          <p className="mt-2 line-clamp-2 text-sm text-brand-ink/75">{translate(lang, homeCopy.statusText)}</p>
           <Link href={`/${lang}/track-request`} className="mt-3 inline-flex text-sm font-bold text-brand-green hover:underline">
             {copy.trackRequest}
           </Link>
         </article>
 
         <article className="card-surface p-4 sm:p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green/80">{labels.transparency}</p>
-          <h2 className="mt-2 text-lg font-bold text-brand-ink sm:text-xl">{labels.transparencyTitle}</h2>
-          <p className="mt-2 line-clamp-2 text-sm text-brand-ink/75">{labels.transparencyText}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-green/80">{translate(lang, homeCopy.transparencyTag)}</p>
+          <h2 className="mt-2 text-lg font-bold text-brand-ink sm:text-xl">{translate(lang, homeCopy.transparencyTitle)}</h2>
+          <p className="mt-2 line-clamp-2 text-sm text-brand-ink/75">{translate(lang, homeCopy.transparencyText)}</p>
           <Link href={`/${lang}/development-projects`} className="mt-3 inline-flex text-sm font-bold text-brand-green hover:underline">
             {copy.developmentProjects}
           </Link>
@@ -256,10 +224,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         <article className="card-surface grid gap-5 p-5 md:grid-cols-[1.02fr,0.98fr] md:p-7">
           <div>
             <p className="inline-flex rounded-full border border-brand-red/30 bg-brand-red/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-red/90">
-              {labels.manifestoTag}
+              {translate(lang, homeCopy.manifestoTag)}
             </p>
             <h3 className="mt-3 text-2xl font-bold text-brand-green">{translate(lang, content.manifesto.title)}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-brand-ink/80 md:text-base">{labels.manifestoText}</p>
+            <p className="mt-3 text-sm leading-relaxed text-brand-ink/80 md:text-base">{translate(lang, homeCopy.manifestoText)}</p>
             <div className="mt-5 flex flex-wrap gap-2">
               <Link href={`/${lang}/manifesto`} className="inline-flex rounded-full bg-brand-green px-4 py-2 text-sm font-bold text-white transition hover:bg-brand-red">
                 {copy.readMore}
@@ -270,7 +238,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                 rel="noreferrer"
                 className="inline-flex rounded-full border border-brand-green/35 px-4 py-2 text-sm font-bold text-brand-green transition hover:bg-brand-green hover:text-white"
               >
-                {labels.openPdf}
+                {copy.openPdf}
               </a>
             </div>
           </div>
@@ -287,7 +255,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       </section>
 
       <section className="space-y-5">
-        <SectionTitle title={copy.governmentProjects} description={labels.projectsDescription} />
+        <SectionTitle title={copy.governmentProjects} description={translate(lang, homeCopy.projectsDescription)} />
         <div className="grid gap-4 md:grid-cols-2">
           {featuredProjects.map((project) => (
             <article key={project.id} className="card-surface overflow-hidden p-3 sm:p-4">
@@ -300,8 +268,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                 <div className="h-full rounded-full bg-brand-green" style={{ width: `${Math.max(0, Math.min(100, project.progressPercent))}%` }} />
               </div>
               <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-brand-ink/75">
-                <span>{labels.budget}: {formatBdt(project.budgetTotal, lang)}</span>
-                <span>{labels.spent}: {formatBdt(project.spentAmount, lang)}</span>
+                <span>{translate(lang, homeCopy.budgetLabel)}: {formatBdt(project.budgetTotal, lang)}</span>
+                <span>{translate(lang, homeCopy.spentLabel)}: {formatBdt(project.spentAmount, lang)}</span>
               </div>
               <Link href={`/${lang}/government-projects/${project.slug}`} className="mt-3 inline-flex text-sm font-bold text-brand-red hover:underline">
                 {copy.readMore}
@@ -312,7 +280,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       </section>
 
       <section className="space-y-5">
-        <SectionTitle title={labels.monthlyReports} />
+        <SectionTitle title={translate(lang, homeCopy.monthlyReportsTitle)} />
         <div className="grid gap-4 md:grid-cols-2">
           {featuredReports.map((report) => (
             <article key={report.id} className="card-surface p-4 sm:p-5">
@@ -322,7 +290,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               <h3 className="mt-2 text-lg font-bold text-brand-green">{translate(lang, report.title)}</h3>
               <p className="mt-2 text-sm text-brand-ink/80">{translate(lang, report.summary)}</p>
               <p className="mt-3 text-xs text-brand-ink/65">
-                {labels.published}: {toLocaleDate(report.publishedDate, lang)}
+                {translate(lang, homeCopy.publishedLabel)}: {toLocaleDate(report.publishedDate, lang)}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <a
@@ -331,14 +299,14 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                   rel="noreferrer"
                   className="inline-flex min-h-10 items-center justify-center rounded-full bg-brand-green px-4 py-2 text-xs font-bold text-white transition hover:bg-brand-ink"
                 >
-                  {labels.openPdf}
+                  {copy.openPdf}
                 </a>
                 <a
                   href={report.pdfUrl}
                   download
                   className="inline-flex min-h-10 items-center justify-center rounded-full border border-brand-green/35 px-4 py-2 text-xs font-bold text-brand-green transition hover:bg-brand-green hover:text-white"
                 >
-                  {labels.download}
+                  {copy.download}
                 </a>
               </div>
             </article>
@@ -347,7 +315,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       </section>
 
       <section className="space-y-5">
-        <SectionTitle title={copy.mediaCoverage} description={labels.mediaDescription} />
+        <SectionTitle title={copy.mediaCoverage} description={translate(lang, homeCopy.mediaDescription)} />
         <MediaCoveragePanel lang={lang} items={mediaItems} />
       </section>
 
@@ -358,8 +326,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
       <section className="card-surface flex flex-col items-start justify-between gap-4 p-6 sm:p-7 md:flex-row md:items-center md:p-9">
         <div>
-          <h2 className="text-2xl font-bold text-brand-green">{labels.ctaTitle}</h2>
-          <p className="mt-2 text-sm text-brand-ink/75">{labels.ctaText}</p>
+          <h2 className="text-2xl font-bold text-brand-green">{translate(lang, homeCopy.ctaTitle)}</h2>
+          <p className="mt-2 text-sm text-brand-ink/75">{translate(lang, homeCopy.ctaText)}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Link href={`/${lang}/write-to-mp`} className="rounded-full bg-brand-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-green">
@@ -373,3 +341,4 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     </div>
   );
 }
+

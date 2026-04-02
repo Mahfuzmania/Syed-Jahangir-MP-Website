@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ChatAssistant } from "@/components/ChatAssistant";
 import { DynamicMotionShell } from "@/components/DynamicMotionShell";
+import { NoticeBarSlot } from "@/components/NoticeBarSlot";
 import { PreFooterCta } from "@/components/PreFooterCta";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -28,6 +29,7 @@ export default async function LangLayout({
   return (
     <div className="site-grid min-h-screen w-full overflow-x-clip">
       <SiteHeader lang={lang} content={content} />
+      <NoticeBarSlot lang={lang} noticeBar={content.noticeBar} />
       <main id="main-content" className="mx-auto w-full max-w-7xl px-4 pb-24 pt-4 sm:pb-28 sm:pt-5 md:px-8 md:pb-10 md:pt-6">
         <DynamicMotionShell>{children}</DynamicMotionShell>
       </main>

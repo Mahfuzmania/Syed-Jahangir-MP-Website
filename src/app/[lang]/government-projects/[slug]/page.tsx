@@ -28,17 +28,17 @@ export default async function GovernmentProjectDetailPage({
     notFound();
   }
 
-  const isBangla = lang === "bn";
   const content = await getSiteContent();
   const project = content.governmentProjects.find((entry) => entry.slug === slug);
   if (!project) {
     notFound();
   }
+  const pageCopy = content.pageCopy.governmentProjectDetails;
 
   return (
     <div className="space-y-6">
       <Link href={`/${lang}/government-projects`} className="inline-flex text-sm font-semibold text-brand-red hover:underline">
-        {isBangla ? "← সরকারি প্রকল্প" : "← Government Projects"}
+        {translate(lang, pageCopy.backToListLabel)}
       </Link>
 
       <div className="card-surface overflow-hidden p-3">
@@ -55,31 +55,32 @@ export default async function GovernmentProjectDetailPage({
 
         <div className="mt-6 grid gap-3 rounded-2xl border border-brand-ink/10 bg-slate-50 p-4 text-sm text-brand-ink/80 md:grid-cols-2">
           <p>
-            <span className="font-semibold">{isBangla ? "সেক্টর" : "Sector"}:</span> {project.sector}
+            <span className="font-semibold">{translate(lang, pageCopy.sectorLabel)}:</span> {project.sector}
           </p>
           <p>
-            <span className="font-semibold">{isBangla ? "অবস্থান" : "Location"}:</span> {project.location}
+            <span className="font-semibold">{translate(lang, pageCopy.locationLabel)}:</span> {project.location}
           </p>
           <p>
-            <span className="font-semibold">{isBangla ? "বাস্তবায়নকারী সংস্থা" : "Implementing Agency"}:</span> {project.implementingAgency}
+            <span className="font-semibold">{translate(lang, pageCopy.implementingAgencyLabel)}:</span> {project.implementingAgency}
           </p>
           <p>
-            <span className="font-semibold">{isBangla ? "মোট বাজেট" : "Total Budget"}:</span> {formatBdt(project.budgetTotal, lang)}
+            <span className="font-semibold">{translate(lang, pageCopy.totalBudgetLabel)}:</span> {formatBdt(project.budgetTotal, lang)}
           </p>
           <p>
-            <span className="font-semibold">{isBangla ? "ব্যয়" : "Spent"}:</span> {formatBdt(project.spentAmount, lang)}
+            <span className="font-semibold">{translate(lang, pageCopy.spentLabel)}:</span> {formatBdt(project.spentAmount, lang)}
           </p>
           <p>
-            <span className="font-semibold">{isBangla ? "অগ্রগতি" : "Progress"}:</span> {project.progressPercent}%
+            <span className="font-semibold">{translate(lang, pageCopy.progressLabel)}:</span> {project.progressPercent}%
           </p>
           <p>
-            <span className="font-semibold">{isBangla ? "ধাপ" : "Phase"}:</span> {translate(lang, project.phase)}
+            <span className="font-semibold">{translate(lang, pageCopy.phaseLabel)}:</span> {translate(lang, project.phase)}
           </p>
           <p>
-            <span className="font-semibold">{isBangla ? "উপকারভোগী" : "Beneficiaries"}:</span> {translate(lang, project.beneficiaries)}
+            <span className="font-semibold">{translate(lang, pageCopy.beneficiariesLabel)}:</span> {translate(lang, project.beneficiaries)}
           </p>
         </div>
       </article>
     </div>
   );
 }
+
